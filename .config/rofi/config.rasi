@@ -1,0 +1,108 @@
+configuration {
+  show-icons: true;
+  modi: "drun";
+  width: 20;
+  lines: 7;
+  line-padding: 2;
+  matching: "fuzzy";
+  font: "JetBrainsMonoMedium Nerd Font 14";
+  display-drun: " ";
+  separator-style: "none";
+  hide-scrollbar: true;
+  line-margin: 0;
+}
+
+@theme "/dev/null"
+* {
+  black:      #5C6370;
+  red:        #E06C75;
+  green:      #98C379;
+  yellow:     #E5C07B;
+  blue:       #61AFEF;
+  mangenta:   #C678DD;
+  cyan:       #56B6C2;
+  emphasis:   #50536b;
+  text:       #DFDFDF;
+  text-alt:   #b2b2b2;
+  fg:         #ABB2BF;
+  bg:         #282C34;
+
+  spacing: 0;
+  background-color: transparent;
+  text-color: @text;
+}
+
+mainbox {
+  padding: 0.5% 0.5%;
+}
+
+window {
+  background-color: #282C34;
+  border: 3;
+  border-color: #eff0eb;
+}
+
+inputbar {
+  margin: 0px 0px 15px 0px;
+  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+  text-color: @blue;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: ":";
+  text-color: @text-alt;
+}
+
+entry {
+  margin: 0px 10px;
+}
+
+listview {
+  spacing: 5px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 2.5px;
+  text-color: @text-alt;
+  highlight: bold #95ee8f; /* green */
+  border-radius: 2px;
+}
+
+element selected {
+  background-color: @emphasis;
+  text-color: @text;
+}
+
+element urgent, element selected urgent {
+  text-color: @red;
+}
+
+element active, element selected active {
+  text-color: @purple;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+    size:             2ch;
+}
+
+message {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+  border: 1px;
+  border-color: @cyan;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+}

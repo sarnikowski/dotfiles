@@ -1,0 +1,19 @@
+# Ignore everything
+/*
+
+!.gitignore
+!.gitignore_global
+
+!.md
+!screenshot.png
+
+# Include shell scripts
+!boostrap.sh
+!commands.sh
+
+# Include top level dotfiles
+!.zshrc
+!.Xresources
+
+# Include .config
+!.config/

@@ -8,7 +8,7 @@
 !screenshot.png
 
 # Include shell scripts
-!boostrap.sh
+!bootstrap.sh
 !commands.sh
 
 # Include top level dotfiles

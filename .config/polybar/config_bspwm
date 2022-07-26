@@ -19,7 +19,7 @@ enable-ipc = true
 background = ${colors.alphabg}
 foreground = ${colors.foreground}
 font-0 = JetBrainsMono Medium Nerd Font:size=13;3
-font-1 = JetBrainsMono Medium Nerd Font:size=15;3
+font-1 = Arimo Nerd Font Mono:size=13;3
 module-margin = 2
 
 
@@ -33,7 +33,7 @@ enable-click = true
 enable-scroll = false
 reverse-scroll = false
 
-ws-icon-0 = 1;%{F#61AFEF}
+ws-icon-0 = 1;%{F#D19A66}
 ws-icon-1 = 2;%{F#98C379}
 ws-icon-2 = 3;%{F#56B6C2}
 ws-icon-3 = 4;%{F#C678DD}
@@ -42,18 +42,20 @@ ws-icon-5 = 6;%{F#E06C75}
 label-focused = %icon%
 label-focused-background = ${colors.08}
 
-label-focused-padding = 1
+format-font = 2
+
+label-focused-padding = 5px
 label-occupied = %icon%
 label-occupied-foreground =#ffffff
-label-occupied-padding = 1
+label-occupied-padding = 5px
 
 label-empty = %icon%
 label-empty-foreground =#ffffff
-label-empty-padding = 1
+label-empty-padding = 5px
 
 label-urgent = %icon%
 xxlabel-urgent-foreground = #88C0D0
-label-urgent-padding = 1
+label-urgent-padding = 5px
 
 
 [module/title_bar]
@@ -69,7 +71,7 @@ type = internal/date
 time = %H:%M
 date = %a, %b %d/%y
 format = <label>
-label =  %time%
+label = %{T2}%{T-} %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -98,8 +100,8 @@ interface = "wlp5s0"
 interval = 2
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-connected = %{F#98C379}%{T2}直%{T-}%{F-} (%essid%) %{F#98C379}%{T2}↓%{T-}%{F-} %downspeed% %{F#61AFEF}%{T2}↑%{T-}%{F-} %upspeed%
-label-disconnected = %{F#E06C75}%{T2}睊%{T-}%{F-} disconnected
+label-connected = %{F#98C379}直%{F-} (%essid%) %{F#98C379}↓%{F-} %downspeed% %{F#61AFEF}↑%{F-} %upspeed%
+label-disconnected = %{F#E06C75}睊%{F-} disconnected
 
 
 [module/battery]
@@ -119,30 +121,32 @@ ramp-capacity-1 = %
 ramp-capacity-1-foreground = ${colors.03}
 ramp-capacity-2 = %
 ramp-capacity-2-foreground = ${colors.03}
-ramp-capacity-3 =  %{T2}%{T-}
-ramp-capacity-4 =  %{T2}%{T-}
-ramp-capacity-5 =  %{T2}%{T-}
-ramp-capacity-6 =  %{T2}%{T-}
-ramp-capacity-7 =  %{T2}%{T-}
-ramp-capacity-8 =  %{T2}%{T-}
-ramp-capacity-9 =  %{T2}%{T-}
-ramp-capacity-10 = %{T2}%{T-}
-ramp-capacity-11 = %{T2}%{T-}
-ramp-capacity-12 = %{T2}%{T-}
-ramp-capacity-13 = %{T2}%{T-}
-ramp-capacity-14 = %{T2}%{T-}
-ramp-capacity-15 = %{T2}%{T-}
-ramp-capacity-16 = %{T2}%{T-}
-ramp-capacity-17 = %{T2}%{T-}
-ramp-capacity-18 = %{T2}%{T-}
-ramp-capacity-19 = %{T2}%{T-}
+ramp-capacity-3 =  %
+ramp-capacity-4 =  %
+ramp-capacity-5 =  %
+ramp-capacity-6 =  %
+ramp-capacity-7 =  %
+ramp-capacity-8 =  %
+ramp-capacity-9 =  %
+ramp-capacity-10 = %
+ramp-capacity-11 = %
+ramp-capacity-12 = %
+ramp-capacity-13 = %
+ramp-capacity-14 = %
+ramp-capacity-15 = %
+ramp-capacity-16 = %
+ramp-capacity-17 = %
+ramp-capacity-18 = %
+ramp-capacity-19 = %
+
+format-font = 2
 
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format = <label>
-label =  CPU %percentage:1:3%%
+label = %{T2}%{T-} CPU %percentage:1:3%%
 label-foreground = ${colors.04}
 
 [module/updates]
@@ -158,7 +162,7 @@ label-foreground =  ${colors.06}
 type = internal/memory
 interval = 2
 format = <label>
-label =  %mb_used%
+label = %{T2}%{T-} %mb_used%
 label-foreground = ${colors.11}
 
 
@@ -169,7 +173,7 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+label-open = %{T2}%{T-}
 label-open-foreground = ${colors.01}
 label-close =  cancel
 label-close-foreground = ${colors.01}

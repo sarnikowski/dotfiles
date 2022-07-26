@@ -15,5 +15,12 @@
 !.zshrc
 !.Xresources
 
-# Include .config
-!.config/
+# Include config specific folders
+!.config/alacritty
+!.config/bspwm
+!.config/colorschemes
+!.config/nvim
+!.config/polybar
+!.config/rofi
+!.config/sxhkd
+!.config/zsh

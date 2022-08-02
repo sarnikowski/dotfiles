@@ -47,11 +47,11 @@ return require("packer").startup(function()
     use "ray-x/cmp-treesitter"
 
     -- File Tree
-    use {"kyazdani42/nvim-tree.lua", config = require "plugins.config.nvimtree"}
     use {
         "kyazdani42/nvim-web-devicons",
         config = require "plugins.config.devicons"
     }
+    use {"kyazdani42/nvim-tree.lua", config = require "plugins.config.nvimtree"}
 
     -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- Shows media file preview in float window

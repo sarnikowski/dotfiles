@@ -1,16 +1,21 @@
 local colors = require("colors")
 require"nvim-web-devicons".setup {
     override = {
-        Dockerfile = {icon = "", color = colors.cyan, name = "Dockerfile"},
-        rb = {icon = "", color = "#ff75a0", name = "rb"},
-        vue = {icon = "﵂", color = colors.light_green, name = "vue"},
+        Dockerfile = {icon = "", color = "#0DB7ED", name = "Dockerfile"},
+        dockerfile = {icon = "", color = "#0DB7ED", name = "dockerfile"},
+        vue = {icon = "﵂", color = "#42B883", name = "vue"},
         py = {icon = "", color = colors.yellow, name = "py"},
-        toml = {icon = "", color = colors.blue, name = "toml"},
-        zip = {icon = "", color = colors.yellow, name = "zip"},
-        Makefile = {icon = "", color = colors.red, name = "Makefile"},
-        bash = {icon = "", color = colors.sea_green, name = "Bash"},
-        sh = {icon = "", color = colors.sea_green, name = "Sh"},
-        pdf = {icon = "", color = colors.red, name = "Pdf"}
+        toml = {icon = "", color = colors.cyan, name = "toml"},
+        Makefile = {icon = "", color = colors.red, name = "makefile"},
+        bash = {icon = "", color = colors.sea_green, name = "bash"},
+        sh = {icon = "", color = colors.sea_green, name = "sh"},
+        pdf = {icon = "", color = colors.red, name = "pdf"},
+        [".gitlab-ci.yaml"] = {icon = "", color = "#E24329", name = "GitLabCI"},
+        [".gitignore"] = {icon = "", color = "#F34F29", name = "GitIgnore"},
+        [".gitattributes"] = {icon = "", color = "#F34F29", name = "GitAttributes"},
+        [".git-blame-ignore-revs"] = {icon = "", color = "#F34F29", name = "GitBlameIgnoreRevs"},
+        [".envrc"] = {icon = "", color = colors.yellow, name = "Envrc"}
+
     },
     default = true
 }

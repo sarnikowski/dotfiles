@@ -59,7 +59,7 @@ require("nvim-tree").setup {
     renderer = {
         indent_markers = {
             enable = true,
-            icons = {corner = "└ ", edge = "│ ", none = "  "}
+            icons = {corner = "└", edge = "│ ", none = "  "}
         },
         highlight_git = true,
         root_folder_modifier = ":~",

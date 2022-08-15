@@ -30,42 +30,42 @@ require"bufferline".setup {
 
     -- bar colors
     highlights = {
-        fill = {guifg = bar_fg, guibg = bar_bg},
-        background = {guifg = bar_fg, guibg = bar_bg},
+        fill = {fg = bar_fg, bg = bar_bg},
+        background = {fg = bar_fg, bg = bar_bg},
 
         -- buffer
         buffer_selected = {
-            guifg = active_buffer_fg,
-            guibg = active_buffer_bg,
-            gui = "bold"
+            fg = active_buffer_fg,
+            bg = active_buffer_bg,
+            bold = true
         },
-        buffer_visible = {guifg = visible_buffer_fg, guibg = bar_bg},
+        buffer_visible = {fg = visible_buffer_fg, bg = bar_bg},
 
         -- tabs over right
-        tab = {guifg = visible_buffer_fg, guibg = bg},
-        tab_close = {guifg = tab_close_fg, guibg = bar_bg},
+        tab = {fg = visible_buffer_fg, bg = bg},
+        tab_close = {fg = tab_close_fg, bg = bar_bg},
 
         -- close button
-        close_button = {guifg = bar_fg, guibg = bar_bg},
-        close_button_visible = {guifg = visible_buffer_fg, guibg = bar_bg},
+        close_button = {fg = bar_fg, bg = bar_bg},
+        close_button_visible = {fg = visible_buffer_fg, bg = bar_bg},
         close_button_selected = {
-            guifg = active_buffer_fg,
-            guibg = active_buffer_bg
+            fg = active_buffer_fg,
+            bg = active_buffer_bg
         },
 
         -- buffer separators
-        separator = {guifg = bar_bg, guibg = bar_bg},
-        separator_selected = {guifg = bar_bg, guibg = bar_bg},
-        separator_visible = {guifg = bar_bg, guibg = bar_bg},
+        separator = {fg = bar_bg, bg = bar_bg},
+        separator_selected = {fg = bar_bg, bg = bar_bg},
+        separator_visible = {fg = bar_bg, bg = bar_bg},
 
         -- indicator
-        indicator_selected = {guifg = bar_bg, guibg = bar_bg},
+        indicator_selected = {fg = bar_bg, bg = bar_bg},
 
         -- modified files (but not saved)
         modified_selected = {
-            guifg = modified_selected_fg,
-            guibg = active_buffer_bg
+            fg = modified_selected_fg,
+            bg = active_buffer_bg
         },
-        modified_visible = {guifg = modified_visible_fg, guibg = "#23272f"}
+        modified_visible = {fg = modified_visible_fg, bg = "#23272f"}
     }
 }

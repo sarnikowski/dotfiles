@@ -31,7 +31,6 @@ return require("packer").startup(function()
 
     -- Git
     use {"lewis6991/gitsigns.nvim", config = require "plugins.config.gitsigns"}
-    use {"TimUntersberger/neogit", config = require "plugins.config.neogit"}
     use {"sindrets/diffview.nvim", config = require "plugins.config.diffview"}
 
     -- Autocompletion
@@ -55,7 +54,6 @@ return require("packer").startup(function()
 
     -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- Shows media file preview in float window
-    use "Zane-/cder.nvim"
     use "nvim-telescope/telescope-ui-select.nvim"
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -103,13 +101,16 @@ return require("packer").startup(function()
     use {"goolord/alpha-nvim", config = require "plugins.config.alpha"}
 
     -- Misc
-    use "Pocco81/AutoSave.nvim"
+    use "Pocco81/auto-save.nvim"
     use "tpope/vim-commentary" -- Toogle comments with g+c
     use "famiu/bufdelete.nvim" -- Delete buffer without messing up window
-    use { -- Everything goes to black hole register by default 
+    use { -- Everything goes to black hole register by default
         "gbprod/cutlass.nvim",
         config = require "plugins.config.cutlass"
     }
+
+    -- Cache plugins to faster startup
+    use "lewis6991/impatient.nvim"
 end, {
     display = {
         border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"}

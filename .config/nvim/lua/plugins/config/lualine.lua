@@ -130,18 +130,6 @@ ins_left {
     }
 }
 
-ins_left {
-    'diff',
-    -- Is it me or the symbol for modified us really weird
-    symbols = {added = ' ', modified = '柳 ', removed = ' '},
-    diff_color = {
-        added = {fg = colors.green},
-        modified = {fg = colors.orange},
-        removed = {fg = colors.red}
-    },
-    cond = conditions.hide_in_width
-}
-
 -- Insert mid section. You can make any number of sections in neovim :)
 -- for lualine it's any number greater then 2
 ins_left {function() return '%=' end}
@@ -171,7 +159,21 @@ ins_left {
     cond = conditions.hide_in_width
 }
 
+local function limit(input)
+    input = string.lower(input)
+    if vim.fn.winwidth(0) < 100 then
+        limit = 10
+    else
+        limit = 20
+    end
+    if string.len(input) > limit then
+        input = string.sub(input, 0, limit-1) .. "..."
+    end
+    return input
+end
+
 ins_right {
+    fmt = limit,
     'branch',
     icon = '',
     color = {fg = colors.purple, gui = 'bold'},
@@ -181,5 +183,17 @@ ins_right {
 ins_right {'location', color = {fg = colors.fg, gui = "bold"}}
 
 ins_right {'progress', color = {fg = colors.fg, gui = 'bold'}}
+
+ins_right {
+    'diff',
+    -- Is it me or the symbol for modified us really weird
+    symbols = {added = ' ', modified = '柳', removed = ' '},
+    diff_color = {
+        added = {fg = colors.green},
+        modified = {fg = colors.orange},
+        removed = {fg = colors.red}
+    },
+    cond = conditions.hide_in_width
+}
 
 lualine.setup(config)

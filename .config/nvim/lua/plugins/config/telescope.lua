@@ -40,15 +40,7 @@ require("telescope").setup {
             filetypes = {"png", "webp", "jpg", "jpeg"},
             find_cmd = "rg" -- find command (defaults to `fd`)
         },
-        cder = {
-            previewer_command = "exa " .. "-a " .. "--color=always " .. "-T " ..
-                "--level=3 " .. "--icons " .. "--git-ignore " .. "--long " ..
-                "--no-permissions " .. "--no-user " .. "--no-filesize " ..
-                "--git " .. "--ignore-glob=.git",
-            dir_command = {"fd", "--type", ".", "/home/philip/projects"}
-        }
     }
 }
 require('telescope').load_extension("fzf")
-require('telescope').load_extension("cder")
 require("telescope").load_extension("ui-select")

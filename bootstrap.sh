@@ -3,7 +3,7 @@ export BLUE='\033[0;34m'
 export NC='\033[0m' # No Color
 
 function print_step () {
-	printf "${BLUE}$1${NC}"
+	printf "###${BLUE}$1${NC}###\n"
 }
 
 export user=$(whoami)
@@ -19,8 +19,7 @@ sudo pacman -S base-devel git --noconfirm
 #######
 print_step "Installing yay"
 git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si
+(cd yay-bin; makepkg -si)
 
 ###############
 # Install zsh #
@@ -34,9 +33,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 print_step "Installing zsh plugins"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-cd ~/.oh-my-zsh/custom/plugins
-git clone https://github.com/unixorn/fzf-zsh-plugin.git fzf-zsh-plugin
-cd
+(cd ~/.oh-my-zsh/custom/plugins; git clone https://github.com/unixorn/fzf-zsh-plugin.git fzf-zsh-plugin)
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #################
@@ -83,8 +80,8 @@ sudo pacman -S rust --noconfirm
 #####################
 # Window management #
 #####################
-print_step "Installing bspwm, sxhkd, polybar, rofi, nitrogen"
-sudo pacman -S bspwm sxhkd polybar rofi nitrogen --noconfirm
+print_step "Installing bspwm, sxhkd, polybar, rofi, nitrogen, dunst"
+sudo pacman -S bspwm sxhkd polybar rofi nitrogen dunst --noconfirm
 sudo pacman -S xdotool --noconfirm
 
 ######################
@@ -93,7 +90,7 @@ sudo pacman -S xdotool --noconfirm
 print_step "Setting up dnsmasq"
 sudo pacman -S dnsmasq --noconfirm
 sudo echo -e "[main]\ndns=dnsmasq" > /etc/NetworkManager/conf.d/dns.conf
-sudo cat > /etc/NetworkManager/dnsmasq.d/dnsmasq.conf <<- EOM 
+sudo cat > /etc/NetworkManager/dnsmasq.d/dnsmasq.conf <<- EOF
 # Never forward plain names (without a dot or domain part)
 domain-needed
 # Never forward addresses in the non-routed address spaces.
@@ -106,16 +103,24 @@ no-resolv
 # Google's nameservers.
 server=8.8.8.8
 server=8.8.4.4
-EOM
+EOF
 sudo nmcli general reload
+
+############
+# Firewall #
+############
+print_step "Setting up firewall"
+sudo pacman -S ufw --noconfirm
+sudo ufw default deny incoming
+sudo ufw enable
+
 ##########
 # Neovim #
 ##########
 print_step "Installing Neovim"
 sudo pacman -S make cmake gcc pkgconf m4 automake autoconf --noconfirm
 git clone git@github.com:neovim/neovim.git || echo "Neovim already cloned"
-cd neovim
-sudo make CMAKE_BUILD_TYPE=release install
+(cd neovim; sudo make CMAKE_BUILD_TYPE=Release install)
 
 print_step "Installing packer"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -162,9 +167,6 @@ sudo pacman -S kubectl kubectx --noconfirm
 print_step "Installing minikube"
 sudo pacman -S minikube --noconfirm
 
-print_step "Installing k3d"
-curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-
 #########
 # Tools #
 #########
@@ -194,19 +196,12 @@ sudo pacman -S jq --noconfirm
 git config --global core.excludesfile ~/.gitignore_global
 
 #########
-# Brave #
-#########
-print_step "Installing brave browser"
-sudo pacman -S brave --noconfirm
-
-#########
 # Slack #
 #########
 git clone https://aur.archlinux.org/slack-desktop.git
-cd slack-desktop
-makepkg -sri --noconfirm
+(cd slack-desktop; makepkg -sri --noconfirm)
 
 ###########
 # Spotify #
 ###########
-sudo snap install spotify
+yay -S spotify

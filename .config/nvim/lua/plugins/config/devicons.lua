@@ -1,5 +1,11 @@
+local present, web_devicons = pcall(require, "nvim-web-devicons")
+
+if not present then
+  return
+end
+
 local colors = require("colors")
-require"nvim-web-devicons".setup {
+web_devicons.setup {
     override = {
         Dockerfile = {icon = "", color = "#0DB7ED", name = "Dockerfile"},
         dockerfile = {icon = "", color = "#0DB7ED", name = "dockerfile"},

@@ -1,3 +1,9 @@
+local present, nvim_tree = pcall(require, "nvim-tree")
+
+if not present then
+  return
+end
+
 local utils = require("utils")
 local g = vim.g
 
@@ -6,7 +12,7 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 g.nvim_tree_allow_resize = 1
 
-require("nvim-tree").setup {
+nvim_tree.setup {
     disable_netrw = true,
     open_on_tab = true,
     update_cwd = false,

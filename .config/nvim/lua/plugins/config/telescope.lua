@@ -1,6 +1,12 @@
+local present, telescope = pcall(require, "telescope")
+
+if not present then
+  return
+end
+
 local utils = require("utils")
 local actions = require("telescope.actions")
-require("telescope").setup {
+telescope.setup {
     defaults = {
         vimgrep_arguments = {
             "rg", "--color=never", "--no-heading", "--with-filename",
@@ -42,5 +48,5 @@ require("telescope").setup {
         },
     }
 }
-require('telescope').load_extension("fzf")
-require("telescope").load_extension("ui-select")
+telescope.load_extension("fzf")
+telescope.load_extension("ui-select")

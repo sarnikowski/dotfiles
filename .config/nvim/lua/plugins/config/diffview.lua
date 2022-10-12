@@ -1,6 +1,12 @@
-local cb = require('diffview.config').diffview_callback
+local present, diffview_cfg = pcall(require, "diffview.config")
 
-require'diffview'.setup {
+if not present then
+  return
+end
+
+local cb = diffview_cfg.diffview_callback
+
+diffview_cfg.setup {
     diff_binaries = false, -- Show diffs for binaries
     enhanced_diff_hl = false,
     file_panel = {win_config = {width = 35}},

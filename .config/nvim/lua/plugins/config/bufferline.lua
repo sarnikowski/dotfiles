@@ -1,3 +1,9 @@
+local present, bufferline = pcall(require, "bufferline")
+
+if not present then
+  return
+end
+
 -- define some colors
 local colors = require("colors")
 
@@ -11,7 +17,7 @@ local modified_visible_fg = colors.red
 local modified_selected_fg = colors.green
 local tab_close_fg = colors.light_red
 
-require"bufferline".setup {
+bufferline.setup {
     options = {
         buffer_close_icon = "",
         modified_icon = "",

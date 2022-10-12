@@ -3,6 +3,10 @@ local use = packer.use
 
 return require("packer").startup(function()
     use "wbthomason/packer.nvim"
+    use {
+        "williamboman/mason.nvim",
+        config = require "plugins.config.mason"
+    }
 
     use "nvim-lua/plenary.nvim" -- Used by telescope, gitsigns, neogit
 

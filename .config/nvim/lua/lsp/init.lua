@@ -1,6 +1,14 @@
 local servers = {
-    "pyright", "gopls", "tsserver", "vuels", "dockerls", "jsonls", "yamlls",
-    "bashls", "terraformls"
+    "bashls",
+    "dockerls",
+    "gopls",
+    "jsonls",
+    "pyright",
+    "rust_analyzer",
+    "terraformls",
+    "tsserver",
+    "vuels",
+    "yamlls",
 }
 
 local nvim_lsp = require('lspconfig')

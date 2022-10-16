@@ -74,8 +74,8 @@ sudo pacman -S go --noconfirm
 print_step "Installing nodejs and npm"
 sudo pacman -S nodejs npm --noconfirm
 
-print_step "Installing rust"
-sudo pacman -S rust --noconfirm
+print_step "Installing rustup"
+sudo pacman -S rustup --noconfirm
 
 #####################
 # Window management #
@@ -120,17 +120,13 @@ sudo ufw enable
 print_step "Installing Neovim"
 sudo pacman -S make cmake gcc pkgconf m4 automake autoconf --noconfirm
 git clone git@github.com:neovim/neovim.git || echo "Neovim already cloned"
-(cd neovim; sudo make CMAKE_BUILD_TYPE=Release install)
+(cd neovim; sudo make CMAKE_BUILD_TYPE=RelWithDebInfo install)
 
 print_step "Installing packer"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 print_step "Installing xclip"
 sudo pacman -S xclip --noconfirm
-
-print_step "Installing Lsps"
-source ./commands.sh
-install-lsps
 
 ##########
 # Python #
@@ -166,6 +162,9 @@ sudo pacman -S kubectl kubectx --noconfirm
 
 print_step "Installing minikube"
 sudo pacman -S minikube --noconfirm
+
+print_step "Installing helm and skaffold"
+sudo pacman -S helm skaffold --noconfirm
 
 #########
 # Tools #

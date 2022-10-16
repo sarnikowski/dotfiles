@@ -107,13 +107,13 @@ font:
     family: JetBrainsMono Nerd Font
     style: Medium
   bold:
-    family: JetBrainsMonoMedium Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: JetBrainsMonoMedium Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: JetBrainsMonoMedium Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
 
   size: 10.0

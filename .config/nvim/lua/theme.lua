@@ -95,12 +95,14 @@ theme.base = {
     }, -- Used for "Hint" diagnostic virtual text
 
     -- Treesitter
-    TSParameter = {fg = colors.orange},
-    TSFuncBuiltin = {fg = colors.cyan},
-    TSConstructor = {fg = colors.cyan},
-    TSKeyword = {fg = colors.purple},
-    TSKeywordFunction = {fg = colors.purple},
-    TSTypeBuiltin = {fg = colors.cyan},
+    ["@constructor"] = {fg = colors.cyan},
+    ["@function.builtin"] = {fg = colors.cyan},
+    ["@keyword"] = {fg = colors.purple},
+    ["@keyword.function"] = {fg = colors.purple},
+    ["@namespace"] = { fg = colors.fg},
+    ["@parameter"] = { fg = colors.orange},
+    ["@type.builtin"] = {fg = colors.cyan},
+    ["@variable"] = {fg = colors.fg},
 
     -- General
     LineNr = {fg = "#5C6370"},

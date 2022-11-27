@@ -82,7 +82,7 @@ return require("packer").startup(function()
 
     -- Paranthesis
     use {"windwp/nvim-autopairs", config = require "plugins.config.autopairs"}
-    use "kylechui/nvim-surround"
+    use {"kylechui/nvim-surround", config = require "plugins.config.surround"}
 
     -- Swap arguments
     use "mizlan/iswap.nvim"

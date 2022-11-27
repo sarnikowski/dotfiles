@@ -45,8 +45,19 @@ local lsp_flags = {
     debounce_text_changes = 150
 }
 
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {on_attach = on_attach, flags = lsp_flags}
+for _, server in ipairs(servers) do
+    if server == "vuels" then
+        nvim_lsp[server].setup {
+          on_attach = on_attach,
+          flags = lsp_flags,
+          cmd = { "vue-language-server" , "--stdio" },
+          init_options = {
+              typescript = { tsdk = "/usr/lib/node_modules/typescript/lib" }
+          }
+      }
+    else
+        nvim_lsp[server].setup {on_attach = on_attach, flags = lsp_flags}
+    end
 end
 
 local border = {
@@ -74,7 +85,7 @@ vim.fn.sign_define("DiagnosticSignWarning", {
     texthl = "DiagnosticWarning"
 })
 vim.fn.sign_define("DiagnosticSignInformation", {
-    text = "",
+    text = "",
     numhl = "DiagnosticInformation",
     texthl = "DiagnosticInformation"
 })
@@ -92,9 +103,10 @@ null_ls.setup({
                 "--config /home/philip/.config/flake8", "--stdin-display-name",
                 "$FILENAME", "-"
             }
-        }), null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.formatting.prettier
+        }),
+        -- null_ls.builtins.diagnostics.eslint,
+        -- null_ls.builtins.code_actions.eslint,
+        -- null_ls.builtins.formatting.prettier
     },
     on_attach = on_attach
 })

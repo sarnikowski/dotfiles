@@ -15,7 +15,7 @@ local options = {
     "pyright",
     "rust-analyzer",
     "typescript-language-server",
-    "vetur-vls",
+    "vue-language-server",
     "yaml-language-server",
   },
   linters = {

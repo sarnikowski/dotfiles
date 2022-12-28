@@ -1,7 +1,7 @@
 [bar/left]
 modules-left = bspwm title_bar
 modules-center = wireless
-modules-right = cpu memory updates pulseaudio date powermenu
+modules-right = kernel cpu memory updates pulseaudio date powermenu
 height = 1.7%
 width = 100%
 offset-x = 0%
@@ -21,7 +21,6 @@ foreground = ${colors.foreground}
 font-0 = JetBrainsMono Medium Nerd Font:size=13;3
 font-1 = Arimo Nerd Font Mono:size=13;3
 module-margin = 2
-
 
 [module/bspwm]
 type = internal/bspwm
@@ -57,13 +56,11 @@ label-urgent = %icon%
 xxlabel-urgent-foreground = #88C0D0
 label-urgent-padding = 5px
 
-
 [module/title_bar]
 type = custom/ipc
 hook-0 = python3 ~/.config/polybar/scripts/title_bar.py
 initial = 1
 ;polybar-msg hook MODULENAME HOOKNUMBER
-
 
 [module/date]
 type = internal/date
@@ -75,7 +72,6 @@ label = %{T2}%{T-} %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
-sink = alsa_output.pci-0000_0c_00.3.iec958-stereo
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage:2:3%%
 format-muted = <label-muted>
@@ -93,16 +89,14 @@ ramp-volume-4-foreground = ${colors.03}
 ramp-volume-5 = 墳
 ramp-volume-5-foreground = ${colors.01}
 
-
 [module/wireless]
 type = internal/network
-interface = "wlp5s0"
+interface = "wlan0"
 interval = 2
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 label-connected = %{F#98C379}直%{F-} (%essid%) %{F#98C379}↓%{F-} %downspeed% %{F#61AFEF}↑%{F-} %upspeed%
 label-disconnected = %{F#E06C75}睊%{F-} disconnected
-
 
 [module/battery]
 type = internal/battery
@@ -141,7 +135,6 @@ ramp-capacity-19 = %
 
 format-font = 2
 
-
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -154,9 +147,16 @@ type = custom/script
 exec = checkupdates | wc -l | awk '{print $1; exit}'
 format = <label>
 interval = 7200
-label = %output% updates
+label = %output% updates
 label-foreground =  ${colors.06}
 
+[module/kernel]
+type = custom/script
+exec = uname -r
+tail = false
+interval = 1024
+label =  %output%
+label-foreground = ${colors.06}
 
 [module/memory]
 type = internal/memory
@@ -164,7 +164,6 @@ interval = 2
 format = <label>
 label = %{T2}%{T-} %mb_used%
 label-foreground = ${colors.11}
-
 
 [module/powermenu]
 type = custom/menu
@@ -181,27 +180,26 @@ label-separator = |
 label-separator-foreground = ${colors.01}
 
 menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
+menu-0-0-exec = #powermenu.open.1
 menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-menu-0-2 = log off
-menu-0-2-exec = menu-open-3
+menu-0-1-exec = #powermenu.open.2
+menu-0-2 = log out
+menu-0-2-exec = #powermenu.open.3
 
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
+menu-1-0 = reboot
+menu-1-0-exec = reboot
+menu-1-1 = cancel
+menu-1-1-exec = #powermenu.open.0
 
 menu-2-0 = power off
 menu-2-0-exec = poweroff
 menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-2-1-exec = #powermenu.open.0
 
-menu-3-0 = log off
+menu-3-0 = log out
 menu-3-0-exec = pkill -KILL -u $USER
 menu-3-1 = cancel
-menu-3-1-exec = menu-open-0
-
+menu-3-1-exec = #powermenu.open.0
 
 [colors]
 background = ${xrdb:background}

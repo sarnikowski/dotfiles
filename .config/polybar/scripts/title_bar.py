@@ -7,7 +7,7 @@ from alias import alias
 def main():
     window_id = get_active_window_id()
     if window_id == 0:
-        print("%{F#56B6C2}%{T2} %{T- F-}")
+        print("%{F#56B6C2}%{T2}%{T- F-}")
     else:
         wm_class = get_focused_wm_class(window_id).lower()
         if wm_class in alias:

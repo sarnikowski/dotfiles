@@ -1,0 +1,11 @@
+- name: Check for neovim installation | stat
+  stat:
+    path: "{{ dotfiles_home }}/library/yay"
+  register: yay_stat
+
+- name: Clone yay ansible plugin | raw
+  raw: |
+    git clone git@github.com:mnussbaum/ansible-yay.git "{{ home }}/Downloads/ansible-yay"
+    cp "{{ home }}/Downloads/ansible-yay/yay" "{{ dotfiles_home }}/library"
+    rm -rf "{{ home }}/Downloads/ansible-yay"
+  when: not yay_stat.stat.exists

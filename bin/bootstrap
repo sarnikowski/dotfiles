@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+tags="$1"
+
+if [ -z $tags ]; then
+  tags="all"
+fi
+
+if ! [ -x "$(command -v ansible)" ]; then
+  sudo pacman -S ansible --noconfirm
+fi
+
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
+builtin cd $SCRIPT_DIR; builtin cd ..
+
+ansible-playbook -i hosts dotfiles.yaml --ask-become-pass --tags $tags
+
+if [ $? -eq 0 ]; then
+  notify-send -u normal "Dotfiles ($tags) bootstrapped successfully"
+else
+  notify-send -u critical "Dotfiles ($tags) failed bootstrapping"
+fi

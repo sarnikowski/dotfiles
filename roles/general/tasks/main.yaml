@@ -1,0 +1,23 @@
+- name: Install general tools | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - sops
+    - fzf
+    - ripgrep
+    - bat
+    - exa
+    - jq
+
+- name: Install slack and spotify | command
+  become: yes
+  become_user: root
+  yay:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - slack-desktop
+    - spotify-dev

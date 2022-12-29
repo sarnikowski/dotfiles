@@ -1,0 +1,69 @@
+- name: Boostrap machine
+  hosts: local
+  roles:
+    - role: ansible_plugins
+      tags:
+        - ansible_plugins
+    - role: alacritty
+      tags:
+        - alacritty
+    - role: bspwm
+      tags:
+        - bspwm
+    - role: colorschemes
+      tags:
+        - colorschemes
+    - role: direnv
+      tags:
+        - direnv
+    - role: dnsmasq
+      tags:
+        - dnsmasq
+    - role: docker
+      tags:
+        - docker
+    - role: general
+      tags:
+        - general
+    - role: git
+      tags:
+        - git
+    - role: golang
+      tags:
+        - golang
+    - role: k8s
+      tags:
+        - k8s
+    - role: nerd-fonts
+      tags:
+        - nerd-fonts
+    - role: nodejs
+      tags:
+        - nodejs
+    - role: nvim
+      tags:
+        - nvim
+    - role: polybar
+      tags:
+        - polybar
+    - role: python
+      tags:
+        - python
+    - role: rofi
+      tags:
+        - rofi
+    - role: rust
+      tags:
+        - rust
+    - role: sxhkd
+      tags:
+        - sxhkd
+    - role: ufw
+      tags:
+        - ufw
+    - role: xresources
+      tags:
+        - xresources
+    - role: zsh
+      tags:
+        - zsh

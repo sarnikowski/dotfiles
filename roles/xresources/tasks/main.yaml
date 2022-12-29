@@ -1,0 +1,6 @@
+- name: Add colorscheme and font | copy
+  copy:
+    content: |
+      #include "{{ home }}/.config/colorschemes/onedark"
+      #define font1 GohuFont Nerd Font Mono
+    dest: "{{ home }}/.Xresources"

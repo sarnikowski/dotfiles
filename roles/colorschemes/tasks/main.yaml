@@ -1,0 +1,6 @@
+- name: Links onedark file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/colorschemes/files/onedark"
+    dest: "{{ home }}/.config/colorschemes/onedark"
+    state: link
+    force: yes

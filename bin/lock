@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+IMAGE=/tmp/i3lock.png
+SCREENSHOT="scrot $IMAGE"
+BLURTYPE="0x5"
+# Get the screenshot, add the blur and lock the screen with it
+$SCREENSHOT
+convert $IMAGE -blur $BLURTYPE $IMAGE
+i3lock -i $IMAGE
+rm $IMAGE

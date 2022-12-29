@@ -1,0 +1,6 @@
+- name: Link bspwmrc file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/bspwm/files/bspwmrc"
+    dest: "{{ home }}/.config/bspwm/bspwmrc"
+    state: link
+    force: yes

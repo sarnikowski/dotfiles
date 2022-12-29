@@ -1,0 +1,21 @@
+- name: Ensure pip | command
+  command: python -m ensurepip --upgrade
+
+- name: Install pipx | command
+  command: python -m pip install --user pipx
+
+- name: Install postresql-libs | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: postgresql-libs
+    state: present
+
+- name: Install pipx packages | pacman
+  command: pipx install '{{ item }}'
+  loop:
+    - "dvc[s3]"
+    - black
+    - isort
+    - pre-commit
+    - poetry

@@ -1,0 +1,13 @@
+- name: Install direnv | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: direnv
+    state: present
+
+- name: Link direnvrc file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/direnv/files/direnvrc"
+    dest: "{{ home }}/.config/direnv/direnvrc"
+    state: link
+    force: yes

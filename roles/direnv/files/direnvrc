@@ -1,0 +1,14 @@
+dotenvsops() {
+  local path=${1:-}
+  if [[ -z $path ]]; then
+    path=$PWD/.env
+  elif [[ -d $path ]]; then
+    path=$path/.env
+  fi
+  watch_file "$path"
+  if ! [[ -f $path ]]; then
+    log_error ".env at $path not found"
+    return 1
+  fi
+  eval "$(sops -d --output-type dotenv "$@" | "$direnv" dotenv bash /dev/stdin)"
+}

@@ -1,0 +1,25 @@
+- name: Install dnsmasq | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: dnsmasq
+    state: present
+
+- name: Enable dnsmasq | copy
+  become: yes
+  become_user: root
+  copy:
+    content: "[main]\ndns=dnsmasq"
+    dest: /etc/NetworkManager/conf.d/dns.conf
+
+- name: Copy dnsmasq conf | template
+  become: yes
+  become_user: root
+  template:
+    src: "{{ dotfiles_home }}/roles/dnsmasq/files/dnsmasq.conf"
+    dest: /etc/NetworkManager/dnsmasq.d/dnsmasq.conf
+
+- name: Reload nmcli | command
+  become: yes
+  become_user: root
+  command: nmcli general reload

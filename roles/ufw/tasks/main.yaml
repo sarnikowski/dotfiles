@@ -1,0 +1,16 @@
+- name: Install ufw | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: ufw
+    state: present
+
+- name: Deny incomming traffic | command
+  become: yes
+  become_user: root
+  command: ufw default deny incoming
+
+- name: Enable ufw | command
+  become: yes
+  become_user: root
+  command: ufw enable

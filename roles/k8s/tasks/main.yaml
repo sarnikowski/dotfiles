@@ -1,0 +1,12 @@
+- name: Install K8s packages | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - kubectl
+    - kubectx
+    - minikube
+    - helm
+    - skaffold

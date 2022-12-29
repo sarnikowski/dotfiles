@@ -1,0 +1,13 @@
+- name: Install nodejs | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: nodejs
+    state: present
+
+- name: Install npm | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: npm
+    state: present

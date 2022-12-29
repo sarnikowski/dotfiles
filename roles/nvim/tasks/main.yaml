@@ -1,0 +1,55 @@
+- name: Install prerequisites | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - make
+    - cmake
+    - gcc
+    - pkgconf
+    - m4
+    - automake
+    - autoconf
+
+- name: Check for neovim installation | stat
+  stat:
+    path: "{{ home }}/neovim"
+  register: neovim_stat
+
+- name: Clone neovim | command
+  command: git clone git@github.com:neovim/neovim.git "{{ home }}/neovim"
+  when: not neovim_stat.stat.exists
+
+- name: Install neovim | command
+  become: yes
+  become_user: root
+  command: chdir="{{ home }}/neovim" make CMAKE_BUILD_TYPE=RelWithDebInfo install
+
+- name: Check for packer installation | stat
+  stat:
+    path: "{{ home }}/.local/share/nvim/site/pack/packer"
+  register: packer_stat
+
+- name: Install packer | command
+  command: git clone --depth 1 https://github.com/wbthomason/packer.nvim "{{ home }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  when: not packer_stat.stat.exists
+
+- name: Check nvim config symlink | stat
+  stat:
+    path: "{{ home }}/.config/nvim"
+  register: nvim_config_linked
+
+- name: Remove nvim folder if exists | file
+  file:
+    path: "{{ home }}/.config/nvim"
+    state: absent
+  when: nvim_config_linked.stat.isdir is defined and nvim_config_linked.stat.isdir
+
+- name: Link nvim config | file
+  file:
+    src: "{{ dotfiles_home }}/roles/nvim/files"
+    dest: "{{ home }}/.config/nvim"
+    state: link
+    force: yes

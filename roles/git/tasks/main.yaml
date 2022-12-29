@@ -1,0 +1,2 @@
+- name: Set global .gitignore | command
+  command: git config --global core.excludefile "{{ dotfiles_home }}/roles/git/files/.gitignore"

@@ -1,0 +1,24 @@
+- name: Install polybar | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: polybar
+    state: present
+
+- name: Check polybar config symlink | stat
+  stat:
+    path: "{{ home }}/.config/polybar"
+  register: polybar_config_linked
+
+- name: Remove polybar folder if exists | file
+  file:
+    path: "{{ home }}/.config/polybar"
+    state: absent
+  when: polybar_config_linked.stat.isdir is defined and polybar_config_linked.stat.isdir
+
+- name: Link polybar config | file
+  file:
+    src: "{{ dotfiles_home }}/roles/polybar/files"
+    dest: "{{ home }}/.config/polybar"
+    state: link
+    force: yes

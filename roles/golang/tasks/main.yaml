@@ -1,0 +1,6 @@
+- name: Install go | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: go
+    state: present

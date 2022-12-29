@@ -1,0 +1,13 @@
+- name: Install alacritty | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: alacritty
+    state: present
+
+- name: Link alacritty.yaml file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/alacritty/files/alacritty.yaml"
+    dest: "{{ home }}/.config/alacritty/alacritty.yml"
+    state: link
+    force: yes

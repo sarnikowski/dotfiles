@@ -5,6 +5,11 @@
     name: sxhkd
     state: present
 
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/sxhkd"
+    state: directory
+
 - name: Link sxhkdrc file | file
   file:
     src: "{{ dotfiles_home }}/roles/sxhkd/files/sxhkdrc"

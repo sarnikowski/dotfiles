@@ -1,3 +1,8 @@
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/colorschemes"
+    state: directory
+
 - name: Links onedark file | file
   file:
     src: "{{ dotfiles_home }}/roles/colorschemes/files/onedark"

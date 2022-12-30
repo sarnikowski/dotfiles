@@ -5,6 +5,11 @@
     name: rofi
     state: present
 
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/rofi"
+    state: directory
+
 - name: Link rofi config file | file
   file:
     src: "{{ dotfiles_home }}/roles/rofi/files/config.rasi"

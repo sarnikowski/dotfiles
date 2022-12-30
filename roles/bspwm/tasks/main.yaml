@@ -1,3 +1,8 @@
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/bspwm"
+    state: directory
+
 - name: Link bspwmrc file | file
   file:
     src: "{{ dotfiles_home }}/roles/bspwm/files/bspwmrc"

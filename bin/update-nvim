@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-if ! [ -x "$(command -v ansible)" ]; then
-  sudo pacman -S ansible --noconfirm
-fi
-
-SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
-builtin cd $SCRIPT_DIR; builtin cd ..
-
-ansible-playbook -i hosts dotfiles --ask-become-pass --tags update
-
-if [ $? -eq 0 ]; then
-  notify-send -u normal "Succesfully updated neovim"
-else
-  notify-send -u critical "Failed updating neovim"
-fi
+neovim_path="/home/$(whoami)/neovim"
+(cd $neovim_path && sudo rm -rf build && make clean)
+(cd $neovim_path && git pull && sudo make CMAKE_BUILD_TYPE=RelWithDebInfo install)

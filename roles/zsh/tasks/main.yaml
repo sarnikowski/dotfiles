@@ -45,6 +45,11 @@
   command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k"
   when: not oh_my_zsh_stat.stat.exists
 
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/zsh"
+    state: directory
+
 - name: Link .zshrc home file | file
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/.zshrc_home"

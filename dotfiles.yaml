@@ -1,9 +1,6 @@
 - name: Boostrap machine
   hosts: local
   roles:
-    - role: ansible_plugins
-      tags:
-        - ansible_plugins
     - role: alacritty
       tags:
         - alacritty

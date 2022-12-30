@@ -13,10 +13,10 @@ fi
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 builtin cd $SCRIPT_DIR; builtin cd ..
 
-ansible-playbook -i hosts dotfiles.yaml --ask-become-pass --tags $tags
-
-if [ $? -eq 0 ]; then
-  notify-send -u normal "Dotfiles ($tags) bootstrapped successfully"
-else
-  notify-send -u critical "Dotfiles ($tags) failed bootstrapping"
+if ! [ -f ./library/yay ]; then
+    git clone git@github.com:mnussbaum/ansible-yay.git /tmp/ansible-yay
+    cp /tmp/ansible-yay/yay ./library/
+    rm -rf /tmp/ansible-yay
 fi
+
+ansible-playbook -i hosts dotfiles.yaml --ask-become-pass --tags $tags

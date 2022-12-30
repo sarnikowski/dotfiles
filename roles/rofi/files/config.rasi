@@ -5,7 +5,7 @@ configuration {
   lines: 7;
   line-padding: 2;
   matching: "fuzzy";
-  font: "JetBrainsMonoMedium Nerd Font 14";
+  font: "JetBrainsMono Nerd Font 14";
   display-drun: " ";
   separator-style: "none";
   hide-scrollbar: true;

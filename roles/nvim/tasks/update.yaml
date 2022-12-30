@@ -1,9 +1,0 @@
-- name: Clear neovim build cache | command
-  become: yes
-  become_user: root
-  command: chdir="{{ home }}/neovim" rm -rf build && make clean
-
-- name: Pull main and compile neovim | command
-  become: yes
-  become_user: root
-  command: chdir="{{ home }}/neovim" git pull && CMAKE_BUILD_TYPE=RelWithDebInfo install

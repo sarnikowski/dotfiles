@@ -104,16 +104,16 @@ window:
 # Font configuration
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNerdFont
     style: Medium
   bold:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNerdFont
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNerdFont
     style: Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMonoNerdFont
     style: Bold Italic
 
   size: 10.0

@@ -8,8 +8,8 @@ offset-x = 0%
 offset-y = 0%
 radius = 0.0
 padding = 0
-padding-left = 1
-padding-right = 2
+padding-left = 0
+padding-right = 1
 override-redirect = true
 line-size = 2
 border-size = 0%
@@ -18,8 +18,8 @@ wm-restack = bspwm
 enable-ipc = true
 background = ${colors.alphabg}
 foreground = ${colors.foreground}
-font-0 = JetBrainsMono Nerd Font:size=13:style=Medium;3
-font-1 = Arimo Nerd Font Mono:size=13;3
+font-0 = JetBrainsMonoNerdFont:size=13:style=Medium;3
+font-1 = ArimoNerdFont:size=14;3
 module-margin = 2
 
 [module/bspwm]
@@ -46,11 +46,11 @@ format-font = 2
 label-focused-padding = 5px
 label-occupied = %icon%
 label-occupied-foreground =#ffffff
-label-occupied-padding = 5px
+label-occupied-padding = 3px
 
 label-empty = %icon%
 label-empty-foreground =#ffffff
-label-empty-padding = 5px
+label-empty-padding = 3px
 
 label-urgent = %icon%
 xxlabel-urgent-foreground = #88C0D0
@@ -162,7 +162,7 @@ label-foreground = ${colors.06}
 type = internal/memory
 interval = 2
 format = <label>
-label = %{T2}%{T-} %mb_used%
+label = %{T2}󰍛%{T-} %mb_used%
 label-foreground = ${colors.11}
 
 [module/powermenu]

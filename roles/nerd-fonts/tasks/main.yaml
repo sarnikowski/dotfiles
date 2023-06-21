@@ -7,7 +7,7 @@
 
 - name: Download Nerd fonts | raw
   raw: |
-    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/{{ item }}.zip" -P "{{ home }}/Downloads"
+    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/{{ item }}.zip" -P "{{ home }}/Downloads"
     unzip "{{ home }}/Downloads/{{ item }}.zip" -d "{{ home }}/.fonts/"
     rm "{{ home }}/Downloads/{{ item }}.zip"
   loop:

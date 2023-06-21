@@ -5,6 +5,7 @@ local servers = {
     "jsonls",
     "pyright",
     "rust_analyzer",
+    "sqlls",
     "terraformls",
     "tsserver",
     "vuels",
@@ -55,6 +56,17 @@ for _, server in ipairs(servers) do
               typescript = { tsdk = "/usr/lib/node_modules/typescript/lib" }
           }
       }
+    elseif server == "yamlls" then
+        nvim_lsp[server].setup {
+            on_attach = on_attach,
+            flags = lsp_flags,
+            settings = {
+                yaml = {
+                    keyOrdering = false
+                }
+            },
+            cmd = { "yaml-language-server", "--stdio" }
+        }
     else
         nvim_lsp[server].setup {on_attach = on_attach, flags = lsp_flags}
     end

@@ -37,6 +37,9 @@ map("n", "<Leader>ft",
 -- ISwap
 map("n", "<Leader>sw", [[<Cmd>ISwap<CR>]], {noremap = true, silent = true})
 
+-- Treesj
+map("n", "<Leader>tt", [[<Cmd>TSJToggle<CR>]], {noremap = true, silent = true})
+
 -- LSP
 map("n", "<Leader>rs", [[<Cmd>LspRestart<CR>]], {noremap = true, silent = true})
 

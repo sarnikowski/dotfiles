@@ -87,6 +87,9 @@ return require("packer").startup(function()
     -- Swap arguments
     use "mizlan/iswap.nvim"
 
+    -- Split/join code blocks
+    use { "Wansmer/treesj", config = require "plugins.config.treesj"}
+
     -- Markdown
     use {
         "iamcco/markdown-preview.nvim",

@@ -14,6 +14,7 @@ local options = {
     "prettier",
     "pyright",
     "rust-analyzer",
+    "sqlls",
     "typescript-language-server",
     "vue-language-server",
     "yaml-language-server",
@@ -31,9 +32,3 @@ local options = {
 }
 
 mason.setup(options)
-
-vim.api.nvim_create_user_command("MasonInstallAll", function()
-  vim.cmd("MasonInstall " .. table.concat(options.lsps, " "))
-  vim.cmd("MasonInstall " .. table.concat(options.linters, " "))
-  vim.cmd("MasonInstall " .. table.concat(options.formatters, " "))
-end, {})

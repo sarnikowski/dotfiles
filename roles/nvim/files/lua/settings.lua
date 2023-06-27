@@ -1,8 +1,10 @@
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
 local function opt(scope, key, value)
-    scopes[scope][key] = value
-    if scope ~= "o" then scopes["o"][key] = value end
+	scopes[scope][key] = value
+	if scope ~= "o" then
+		scopes["o"][key] = value
+	end
 end
 
 opt("o", "hidden", true)
@@ -34,17 +36,18 @@ opt("o", "list", true)
 -- Hide stuff TODO map this with Lua
 local cmd = vim.cmd
 
-cmd "set noshowmode"
-cmd "set noshowmatch"
+cmd("set noshowmode")
+cmd("set noshowmatch")
 
 -- Backup stuff
-cmd "set nobackup"
-cmd "set noswapfile"
-cmd "set nowritebackup"
+cmd("set nobackup")
+cmd("set noswapfile")
+cmd("set nowritebackup")
 
-cmd "syntax on"
+cmd("syntax on")
 
-cmd "hi clear CursorLine"
+cmd("hi clear CursorLine")
 
 vim.opt.listchars:append("tab:>-")
 vim.g.mapleader = ","
+vim.opt.fillchars = vim.opt.fillchars + { diff = "/" }

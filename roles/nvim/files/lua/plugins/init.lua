@@ -26,6 +26,12 @@ function DiffviewToogle()
 	end
 end
 
+-- Have to add the runtime path for treesitter, otherwise the parses are reinstalled
+-- on every startup.
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/3605
+vim.opt.runtimepath:append("$HOME/.local/share/treesitter")
+
+
 require("lazy").setup({
 	{
 		"joshdick/onedark.vim",
@@ -45,7 +51,8 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				highlight = { enable = true, use_languagetree = true },
+				parser_install_dir = "$HOME/.local/share/treesitter",
+				highlight = { enable = true},
 			})
 		end,
 	},
@@ -161,7 +168,38 @@ require("lazy").setup({
 	-- Autocompletion
 	{
 		"hrsh7th/nvim-cmp",
-		opts = require("plugins.config.cmp"),
+		config = function()
+			local cmp = require("cmp")
+			cmp.setup({
+				autocomplete = require("cmp").TriggerEvent.TextChanged,
+				sources = {
+					{ name = "nvim_lsp" },
+					{ name = "nvim_lua" },
+					{ name = "treesitter" },
+					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "calc" },
+				},
+				mapping = require("cmp").mapping.preset.insert({
+					["<C-c>"] = require("cmp").mapping.close(),
+					["<C-space>"] = require("cmp").mapping.complete(),
+				}),
+				preselect = require("cmp").PreselectMode.Item,
+				formatting = {
+					fields = { "kind", "abbr", "menu" },
+					format = function(_, vim_item)
+						-- fancy icons and a name of kind
+						vim_item.menu = vim_item.kind
+						vim_item.kind = require("lspkind").presets.default[vim_item.kind]
+						return vim_item
+					end,
+				},
+			})
+			cmp.setup.cmdline(':', {
+				sources = cmp.config.sources({{name = 'path'}, {name = 'cmdline'}}),
+				mapping = cmp.mapping.preset.cmdline({})
+			})
+		end,
 		event = "InsertEnter",
 		dependencies = {
 			"onsails/lspkind-nvim",
@@ -340,10 +378,10 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Autoconfigure indentation type based on other files}
+	-- Autoconfigure indentation type based on other files
 	{
 		"tpope/vim-sleuth",
-		lazy = true,
+		lazy = false,
 	},
 
 	-- Startup screen
@@ -385,3 +423,5 @@ require("lazy").setup({
 		end,
 	},
 })
+
+vim.opt.runtimepath:append("$HOME/.local/share/treesitter")

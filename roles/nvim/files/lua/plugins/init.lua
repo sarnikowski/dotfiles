@@ -47,7 +47,7 @@ require("lazy").setup({
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
+		event = "BufRead",
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -90,7 +90,7 @@ require("lazy").setup({
 	{
 		"crispgm/nvim-go",
 		opts = require("plugins.config.go"),
-		lazy = true,
+		event = "BufRead",
 	},
 
 	{
@@ -114,7 +114,7 @@ require("lazy").setup({
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
-		lazy = false,
+		event = "BufRead",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -303,7 +303,7 @@ require("lazy").setup({
 	-- Stabilized windows
 	{
 		"luukvbaal/stabilize.nvim",
-		event = false,
+		lazy = false,
 		config = function()
 			require("stabilize").setup()
 		end,
@@ -312,7 +312,7 @@ require("lazy").setup({
 	-- Movement
 	{
 		"ggandor/leap.nvim",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			local leap = require("leap")
 			leap.setup({
@@ -324,7 +324,7 @@ require("lazy").setup({
 	-- Paranthesis/pairs
 	{
 		"windwp/nvim-autopairs",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			require("nvim-autopairs").setup()
 		end,
@@ -341,18 +341,27 @@ require("lazy").setup({
 	-- Swap arguments
 	{
 		"mizlan/iswap.nvim",
-		event = "VeryLazy",
+		event = "BufRead",
 		keys = {
 			{ "<leader>sw", "<cmd>ISwap<cr>", desc = "Swap arguments" },
 		},
+		config = function()
+			require("iswap").setup()
+		end,
 	},
 
 	-- Split/join code blocks
 	{
 		"Wansmer/treesj",
-		event = "VeryLazy",
+		event = "BufRead",
+		cmd = { "TSJToogle", "TSJSplit", "TSJJoin" },
 		keys = {
-			{ "<leader>tt", "<cmd>TSJToggle<cr>", desc = "Toogle gather/collapse" },
+			{ "<leader>tt", "<cmd>TSJToggle<cr>", desc = "Toogle split/join for node under cursor" },
+			{ "<leader>ts", "<cmd>TSJSplit<cr>", desc = "Split node under cursor" },
+			{ "<leader>tj", "<cmd>TSJJoin<cr>", desc = "Join node under cursor" },
+		},
+		opts = {
+			use_default_keymaps = false,
 		},
 	},
 
@@ -369,7 +378,7 @@ require("lazy").setup({
 	-- Indentation
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			require("indent_blankline").setup({
 				space_char_blankline = " ",
@@ -381,7 +390,7 @@ require("lazy").setup({
 	-- Autoconfigure indentation type based on other files
 	{
 		"tpope/vim-sleuth",
-		lazy = false,
+		event = "BufEnter",
 	},
 
 	-- Startup screen
@@ -402,7 +411,7 @@ require("lazy").setup({
 
 	{
 		"tpope/vim-commentary",
-		lazy = false,
+		event = "BufEnter",
 	},
 
 	{
@@ -416,6 +425,7 @@ require("lazy").setup({
 	-- Everything goes to black hole register by default
 	{
 		"gbprod/cutlass.nvim",
+		event = "BufEnter",
 		config = function()
 			require("cutlass").setup({
 				cut_key = "m",

@@ -67,11 +67,6 @@ require("lazy").setup({
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		lazy = true,
-	},
-
-	{
 		"folke/lsp-trouble.nvim",
 		event = "VeryLazy",
 		config = function()

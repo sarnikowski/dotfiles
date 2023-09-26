@@ -9,7 +9,7 @@
     - fzf
     - ripgrep
     - bat
-    - exa
+    - eza
     - jq
 
 - name: Install slack and spotify | command

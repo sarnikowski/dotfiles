@@ -82,7 +82,7 @@ alias vim="nvim"
 
 alias grep="grep --color=auto"
 alias ls="ls -A --color=auto --group-directories-first"
-alias ll="exa -lg --git --icons --colour-scale"
+alias ll="eza -lg --git --icons --colour-scale"
 
 alias nvimconf="nvim ~/dotfiles/roles/nvim/files"
 

@@ -73,8 +73,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ###########
 #OH MY ZSH#
 ###########
-plugins=(cp sudo dircycle dirhistory zsh-autosuggestions zsh-syntax-highlighting fzf-zsh-plugin)
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+plugins=(cp sudo dircycle dirhistory zsh-autosuggestions zsh-syntax-highlighting fzf-zsh-plugin)
 #######
 #ALIAS#
 #######

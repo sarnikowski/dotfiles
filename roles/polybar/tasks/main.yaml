@@ -2,8 +2,11 @@
   become: yes
   become_user: root
   pacman:
-    name: polybar
+    name: "{{ item }} "
     state: present
+  loop:
+    - polybar
+    - xdotool
 
 - name: Check polybar config symlink | stat
   stat:

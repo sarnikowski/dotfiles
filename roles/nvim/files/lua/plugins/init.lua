@@ -29,7 +29,7 @@ end
 -- Have to add the runtime path for treesitter, otherwise the parses are reinstalled
 -- on every startup.
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3605
-vim.opt.runtimepath:append("$HOME/.local/share/treesitter")
+vim.opt.runtimepath:prepend("$HOME/.local/share/treesitter")
 
 
 require("lazy").setup({
@@ -429,4 +429,4 @@ require("lazy").setup({
 	},
 })
 
-vim.opt.runtimepath:append("$HOME/.local/share/treesitter")
+vim.opt.runtimepath:prepend("$HOME/.local/share/treesitter")

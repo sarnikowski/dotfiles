@@ -73,10 +73,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ###########
 #OH MY ZSH#
 ###########
-source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(cp sudo dircycle dirhistory zsh-autosuggestions zsh-syntax-highlighting fzf-zsh-plugin)
+source $ZSH/oh-my-zsh.sh
 #######
 #ALIAS#
 #######
@@ -84,7 +82,7 @@ alias vim="nvim"
 
 alias grep="grep --color=auto"
 alias ls="ls -A --color=auto --group-directories-first"
-alias ll="eza -lg --git --icons --colour-scale"
+alias ll="eza -lg --git --icons"
 
 alias nvimconf="nvim ~/dotfiles/roles/nvim/files"
 
@@ -126,7 +124,7 @@ export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history --height 30%"'
 # PGCLI
 export LESS="-SRXF"
 
-# Exa
+# Eza
 export EXA_COLORS="da=0;37:uu=0;37:tr=38;5;011:gu=0;37:ur=38;5;011:gr=38;5;011:sn=38;5;011:sb=38;5;011"
 
 # Direnv

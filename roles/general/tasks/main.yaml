@@ -20,4 +20,4 @@
     state: present
   loop:
     - slack-desktop
-    - spotify-dev
+    - spotify

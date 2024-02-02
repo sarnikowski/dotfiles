@@ -10,9 +10,9 @@
     path: "{{ home }}/.config/alacritty"
     state: directory
 
-- name: Link alacritty.yaml file | file
+- name: Link alacritty.toml file | file
   file:
-    src: "{{ dotfiles_home }}/roles/alacritty/files/alacritty.yaml"
-    dest: "{{ home }}/.config/alacritty/alacritty.yml"
+    src: "{{ dotfiles_home }}/roles/alacritty/files/alacritty.toml"
+    dest: "{{ home }}/.config/alacritty/alacritty.toml"
     state: link
     force: yes

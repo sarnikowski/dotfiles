@@ -29,21 +29,41 @@
   raw: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
   when: not oh_my_zsh_stat.stat.exists
 
-- name: Install zsh-syntax-highlighting | pacman
-  become: yes
-  become_user: root
-  pacman:
-    name: zsh-syntax-highlighting
-    state: present
-  when: not oh_my_zsh_stat.stat.exists
+- name: Check for zsh-autosuggestion | stat
+  stat:
+    path: "{{ home }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+  register: zsh_autosuggestion_stat
+
+- name: Install zsh-autosuggestion | command
+  command: git clone https://github.com/zsh-users/zsh-autosuggestions "{{ home }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+  when: not zsh_autosuggestion_stat.stat.exists
+
+- name: Check for zsh-syntax-highlighting | stat
+  stat:
+    path: "{{ home }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+  register: zsh_syntax_highlighting_stat
+
+- name: Install zsh-syntax-highlighting | command
+  command: git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "{{ home }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+  when: not zsh_syntax_highlighting_stat.stat.exists
+
+- name: Check for fzf-zsh-plugin | stat
+  stat:
+    path: "{{ home }}/.oh-my-zsh/custom/plugins/fzf-zsh-plugin"
+  register: fzf_zsh_plugin_stat
 
 - name: Install fzf-zsh-plugin | command
   command: git clone https://github.com/unixorn/fzf-zsh-plugin.git "{{ home }}/.oh-my-zsh/custom/plugins/fzf-zsh-plugin"
-  when: not oh_my_zsh_stat.stat.exists
+  when: not fzf_zsh_plugin_stat.stat.exists
+
+- name: Check for powerlevel10k | stat
+  stat:
+    path: "{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k"
+  register: powerlevel10k_stat
 
 - name: Install powerlevel10k | command
   command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k"
-  when: not oh_my_zsh_stat.stat.exists
+  when: not powerlevel10k_stat.stat.exists
 
 - name: Creates .config dir | file
   file:

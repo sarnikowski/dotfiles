@@ -55,6 +55,9 @@
     - role: sxhkd
       tags:
         - sxhkd
+    - role: tmux
+      tags:
+        - tmux
     - role: ufw
       tags:
         - ufw

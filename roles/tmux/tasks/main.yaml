@@ -1,0 +1,33 @@
+- name: Install prerequisites | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: tmux
+    state: present
+
+- name: Check tmux plugin is installed | stat
+  stat:
+    path: "{{ home }}/.tmux"
+  register: tmux_plugin_stat
+
+- name: Clone tmux plugin | command
+  command: git clone https://github.com/tmux-plugins/tpm "{{ home }}"/.tmux/plugins/tpm
+  when: not tmux_plugin_stat.stat.exists
+
+- name: Check tmux config symlink | stat
+  stat:
+    path: "{{ home }}/.config/tmux"
+  register: tmux_config_linked
+
+- name: Remove tmux folder if exists | file
+  file:
+    path: "{{ home }}/.config/tmux"
+    state: absent
+  when: tmux_config_linked.stat.isdir is defined and tmux_config_linked.stat.isdir
+
+- name: Link nvim config | file
+  file:
+    src: "{{ dotfiles_home }}/roles/tmux/files"
+    dest: "{{ home }}/.config/tmux"
+    state: link
+    force: yes

@@ -131,3 +131,8 @@ export EXA_COLORS="da=0;37:uu=0;37:tr=38;5;011:gu=0;37:ur=38;5;011:gr=38;5;011:s
 eval "$(direnv hook zsh)"
 
 export GPG_TTY=$(tty)
+
+##########
+# SOURCE #
+##########
+tmux source ~/.config/tmux/tmux.conf

@@ -28,9 +28,9 @@ theme.base = {
     CmpItemKindTypeParameter = {fg = colors.yellow},
 
     -- Git diff
-    DiffAdd = {bg = utils.darken(colors.sea_green, 0.30)},
-    DiffChange = {bg = utils.darken(colors.yellow, 0.30)},
-    DiffDelete = {bg = utils.darken(colors.light_red, 0.40)},
+    DiffAdd = {bg = colors.dark_green},
+    DiffChange = {bg = colors.dark_yellow},
+    DiffDelete = {bg = colors.dark_red},
 
     -- Diffview
     GitSignsAdd = {fg = colors.green},
@@ -40,11 +40,11 @@ theme.base = {
     -- Neogit
     NeogitBranch = {fg = colors.purple},
     NeogitRemote = {fg = colors.cyan},
-    NeogitHunkHeader = {bg = colors.bg_highlight, fg = colors.fg},
+    NeogitHunkHeader = {bg = colors.light_bg, fg = colors.fg},
     NeogitHunkHeaderHighlight = {bg = colors.line_bg, fg = colors.blue},
     NeogitDiffContextHighlight = {
         bg = utils.darken(colors.bg, 0.80),
-        fg = colors.fg_dark
+        fg = colors.dark_fg
     },
     NeogitDiffDeleteHighlight = {fg = colors.red},
     NeogitDiffAddHighlight = {fg = colors.green},
@@ -55,6 +55,8 @@ theme.base = {
     NvimTreeIndentMarker = {fg = "#5c6370"},
     NvimTreeNormal = {bg = colors.bg},
     NvimTreeVertSplit = {fg = colors.line_bg},
+    NvimTreeStatusLineNC = {fg = colors.fg},
+    NvimTreeStatusLine = {fg = colors.fg},
 
     NvimTreeGitDirty = {fg = colors.orange},
     NvimTreeGitDeleted = {fg = colors.red},

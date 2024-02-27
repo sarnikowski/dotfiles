@@ -15,8 +15,8 @@ local conditions = {
 -- Config
 local config = {
     globalstatus = true,
-    disabled_filetypes = {"packer", "alpha", "NvimTree"},
     options = {
+        disabled_filetypes = {"packer", "alpha", "NvimTree"},
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",

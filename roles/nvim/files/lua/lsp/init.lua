@@ -54,6 +54,13 @@ for _, server in ipairs(servers) do
             settings = {yaml = {keyOrdering = false}},
             cmd = {"yaml-language-server", "--stdio"}
         })
+    elseif server == "lua_ls" then
+        nvim_lsp[server].setup({
+            on_attach = on_attach,
+            flags = lsp_flags,
+            settings = {Lua = {diagnostic = {globals = "vim"}}},
+            cmd = {"yaml-language-server", "--stdio"}
+        })
     else
         nvim_lsp[server].setup({on_attach = on_attach, flags = lsp_flags})
     end

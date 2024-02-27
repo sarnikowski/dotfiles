@@ -43,8 +43,7 @@ require("lazy").setup({
                 highlight = {enable = true}
             })
         end
-    }, -- LSP
-    {
+    }, { -- LSP
         "neovim/nvim-lspconfig",
         lazy = false,
         keys = {
@@ -68,33 +67,12 @@ require("lazy").setup({
             }
         }
     },
-
     {"crispgm/nvim-go", opts = require("plugins.config.go"), event = "BufRead"},
-
     {
-        "akinsho/nvim-bufferline.lua",
-        lazy = false,
-        branch = "main",
-        opts = require("plugins.config.bufferline"),
-        keys = {
-            {"<S-t>", "<cmd>tabnew<cr>", desc = "New bufferline tab"},
-            {
-                "<TAB>",
-                "<cmd>BufferLineCycleNext<cr>",
-                desc = "Cycle buffer next"
-            },
-            {
-                "<S-TAB>",
-                "<cmd>BufferLineCyclePrev<cr>",
-                desc = "Cycle buffer prev"
-            }
-        }
-    }, {
         "nvim-lualine/lualine.nvim",
         config = require("plugins.config.lualine"),
         lazy = false
-    }, -- Git
-    {
+    }, { -- Git
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
         dependencies = {"nvim-lua/plenary.nvim"},
@@ -186,8 +164,7 @@ require("lazy").setup({
             "hrsh7th/cmp-path", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-calc", "ray-x/cmp-treesitter"
         }
-    }, -- File tree
-    {
+    }, { -- File tree
         "nvim-tree/nvim-tree.lua",
         dependencies = {
             {
@@ -205,8 +182,7 @@ require("lazy").setup({
                 desc = "Find buffer in nvim tree"
             }
         }
-    }, -- Telescope
-    {
+    }, { -- Telescope
         "nvim-telescope/telescope.nvim",
         event = "VeryLazy",
         dependencies = {
@@ -292,21 +268,18 @@ require("lazy").setup({
                 desc = "Search treesitter"
             }
         }
-    }, -- Stabilized windows
-    {
+    }, { -- Stabilized windows
         "luukvbaal/stabilize.nvim",
         lazy = false,
         config = function() require("stabilize").setup() end
-    }, -- Movement
-    {
+    }, { -- Movement
         "ggandor/leap.nvim",
         event = "BufEnter",
         config = function()
             local leap = require("leap")
             leap.setup({leap.set_default_keymaps(true)})
         end
-    }, -- Paranthesis/pairs
-    {
+    }, { -- Paranthesis/pairs
         "windwp/nvim-autopairs",
         event = "BufEnter",
         config = function() require("nvim-autopairs").setup() end
@@ -314,14 +287,12 @@ require("lazy").setup({
         "kylechui/nvim-surround",
         event = "VeryLazy",
         config = function() require("nvim-surround").setup() end
-    }, -- Swap arguments
-    {
+    }, { -- Swap arguments
         "mizlan/iswap.nvim",
         event = "BufRead",
         keys = {{"<leader>sw", "<cmd>ISwap<cr>", desc = "Swap arguments"}},
         config = function() require("iswap").setup() end
-    }, -- Split/join code blocks
-    {
+    }, { -- Split/join code blocks
         "Wansmer/treesj",
         event = "BufRead",
         cmd = {"TSJToogle", "TSJSplit", "TSJJoin"},
@@ -339,21 +310,21 @@ require("lazy").setup({
             {"<leader>tj", "<cmd>TSJJoin<cr>", desc = "Join node under cursor"}
         },
         opts = {use_default_keymaps = false}
-    }, -- Markdown
-    {
+    }, { -- Markdown
         "iamcco/markdown-preview.nvim",
         event = "VeryLazy",
         build = "cd app && npm install",
         config = function() vim.g.mkdp_auto_close = 0 end
-    }, -- Indentation
-    {
+    }, { -- Indentation
         "lukas-reineke/indent-blankline.nvim",
         event = "BufEnter",
         main = "ibl",
-        opts = {indent = {char = " "}}
-    }, -- Autoconfigure indentation type based on other files
-    {"tpope/vim-sleuth", event = "BufEnter"}, -- Startup screen
-    {
+        opts = {
+            indent = {char = " "},
+            scope = {show_start = false, show_end = false}
+        }
+    }, {"tpope/vim-sleuth", event = "BufEnter"}, -- Autoconfigure indentation type based on other files
+    { -- Startup screen
         "goolord/alpha-nvim",
         event = "VimEnter",
         dependencies = {"nvim-tree/nvim-web-devicons"},
@@ -362,13 +333,11 @@ require("lazy").setup({
         end
     }, -- Misc
     {"Pocco81/auto-save.nvim", event = "VeryLazy"},
-
     {"tpope/vim-commentary", event = "BufEnter"}, {
         "famiu/bufdelete.nvim", -- Delete buffer without messing up window
         event = "VeryLazy",
         keys = {{"<S-x>", "<cmd>Bdelete<cr>", desc = "Delete buffer"}}
-    }, -- Everything goes to black hole register by default
-    {
+    }, { -- Everything goes to black hole register by default
         "gbprod/cutlass.nvim",
         event = "BufEnter",
         config = function() require("cutlass").setup({cut_key = "m"}) end

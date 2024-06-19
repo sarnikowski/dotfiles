@@ -151,18 +151,16 @@ require("lazy").setup({
                     end
                 }
             })
-            cmp.setup.cmdline(':', {
-                sources = cmp.config.sources({
-                    {name = 'path'}, {name = 'cmdline'}
-                }),
-                mapping = cmp.mapping.preset.cmdline({})
-            })
-        end,
+        end
+    }, { -- Autocompletion
+        "hrsh7th/nvim-cmp",
+        opts = require("plugins.config.cmp"),
         event = "InsertEnter",
         dependencies = {
-            "onsails/lspkind-nvim", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-calc", "ray-x/cmp-treesitter"
+            "L3MON4D3/LuaSnip", "onsails/lspkind-nvim", "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-calc", "ray-x/cmp-treesitter",
+            "saadparwaiz1/cmp_luasnip"
         }
     }, { -- File tree
         "nvim-tree/nvim-tree.lua",

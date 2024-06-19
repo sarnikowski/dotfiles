@@ -37,6 +37,9 @@ local lsp_flags = {
     debounce_text_changes = 150
 }
 
+local mason_registry = require('mason-registry')
+local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+
 for _, server in ipairs(servers) do
     if server == "vuels" then
         nvim_lsp[server].setup({
@@ -46,6 +49,21 @@ for _, server in ipairs(servers) do
             init_options = {
                 typescript = {tsdk = "/usr/lib/node_modules/typescript/lib"}
             }
+        })
+    elseif server == "tsserver" then
+        nvim_lsp[server].setup({
+            on_attach = on_attach,
+            flags = lsp_flags,
+            init_options = {
+                plugins = {
+                    {
+                        name = "@vue/typescript-plugin",
+                        location = vue_language_server_path,
+                        languages = { "vue" },
+                    },
+                },
+            },
+            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
         })
     elseif server == "yamlls" then
         nvim_lsp[server].setup({

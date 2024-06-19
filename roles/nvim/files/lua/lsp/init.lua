@@ -97,24 +97,25 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
--- replace the default lsp diagnostic letters with prettier symbols
-vim.fn.sign_define("DiagnosticSignError", {
-    text = "󰅙",
-    numhl = "DiagnosticError",
-    texthl = "DiagnosticError"
-})
-vim.fn.sign_define("DiagnosticSignWarning", {
-    text = "",
-    numhl = "DiagnosticWarning",
-    texthl = "DiagnosticWarning"
-})
-vim.fn.sign_define("DiagnosticSignInformation", {
-    text = "",
-    numhl = "DiagnosticInformation",
-    texthl = "DiagnosticInformation"
-})
-vim.fn.sign_define("DiagnosticSignHint", {
-    text = "󰌵",
-    numhl = "DiagnosticHint",
-    texthl = "DiagnosticSignHint"
-})
+vim.diagnostic.config{
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅙",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "󰌵",
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticWarning",
+            [vim.diagnostic.severity.INFO] = "DiagnosticInformation",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        },
+        texthl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticWarning",
+            [vim.diagnostic.severity.INFO] = "DiagnosticInformation",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        },
+    }
+}

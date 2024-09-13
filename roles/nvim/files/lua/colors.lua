@@ -2,7 +2,7 @@ local utils = require("utils")
 
 local colors = {
     bg = "#282C34",
-    light_bg = utils.lighten("#282C34", 0.20),
+    light_bg = utils.lighten("#282C34", 0.95),
     dark_bg = "#1E222A",
 
     fg = "#ABB2BF",

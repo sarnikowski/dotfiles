@@ -1,6 +1,6 @@
 local servers = {
     "bashls", "clangd", "dockerls", "gopls", "jsonls", "lua_ls", "pyright",
-    "rust_analyzer", "sqlls", "terraformls", "tsserver", "vuels", "yamlls"
+    "rust_analyzer", "sqlls", "terraformls", "ts_ls", "vuels", "yamlls"
 }
 
 local nvim_lsp = require("lspconfig")
@@ -10,8 +10,8 @@ local on_attach = function(_, bufnr)
     -- Mappings.
     local bufopts = {noremap = true, silent = true, buffer = bufnr}
     vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
@@ -38,7 +38,9 @@ local lsp_flags = {
 }
 
 local mason_registry = require('mason-registry')
-local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+local vue_language_server_path = mason_registry.get_package(
+                                     'vue-language-server'):get_install_path() ..
+                                     '/node_modules/@vue/language-server'
 
 for _, server in ipairs(servers) do
     if server == "vuels" then
@@ -50,7 +52,7 @@ for _, server in ipairs(servers) do
                 typescript = {tsdk = "/usr/lib/node_modules/typescript/lib"}
             }
         })
-    elseif server == "tsserver" then
+    elseif server == "ts_ls" then
         nvim_lsp[server].setup({
             on_attach = on_attach,
             flags = lsp_flags,
@@ -59,11 +61,14 @@ for _, server in ipairs(servers) do
                     {
                         name = "@vue/typescript-plugin",
                         location = vue_language_server_path,
-                        languages = { "vue" },
-                    },
-                },
+                        languages = {"vue"}
+                    }
+                }
             },
-            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+            filetypes = {
+                'typescript', 'javascript', 'javascriptreact',
+                'typescriptreact', 'vue'
+            }
         })
     elseif server == "yamlls" then
         nvim_lsp[server].setup({
@@ -97,25 +102,25 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-vim.diagnostic.config{
+vim.diagnostic.config {
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "󰅙",
             [vim.diagnostic.severity.WARN] = "",
             [vim.diagnostic.severity.INFO] = "",
-            [vim.diagnostic.severity.HINT] = "󰌵",
+            [vim.diagnostic.severity.HINT] = "󰌵"
         },
         numhl = {
             [vim.diagnostic.severity.ERROR] = "DiagnosticError",
             [vim.diagnostic.severity.WARN] = "DiagnosticWarning",
             [vim.diagnostic.severity.INFO] = "DiagnosticInformation",
-            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint"
         },
         texthl = {
             [vim.diagnostic.severity.ERROR] = "DiagnosticError",
             [vim.diagnostic.severity.WARN] = "DiagnosticWarning",
             [vim.diagnostic.severity.INFO] = "DiagnosticInformation",
-            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-        },
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint"
+        }
     }
 }

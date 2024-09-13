@@ -33,6 +33,17 @@ return {
     open_on_tab = true,
     update_cwd = false,
     filters = {dotfiles = true},
+    filesystem_watchers = {
+      ignore_dirs = {
+          "venv",
+          ".venv",
+          "node_modules",
+          "__pycache__",
+          ".mypy_cache",
+          ".pytest_cache",
+          ".cache",
+      },
+    },
     diagnostics = {
         enable = false,
         icons = {hint = "󰌵", info = "", warning = "", error = ""}

@@ -56,15 +56,32 @@ require("lazy").setup({
             require("trouble").setup({
                 use_diagnostic_signs = true,
                 mode = "document_diagnostics",
-                auto_close = true
+                auto_close = true,
+                icons = {
+                  indent = {
+                    middle = " ",
+                    last = " ",
+                    top = " ",
+                    ws = "│  ",
+                  },
+                },
+                modes = {
+                  diagnostics = {
+                    groups = {
+                      { "filename", format = "{file_icon} {basename:Title} {count}" },
+                    },
+                  },
+                },
             })
         end,
         keys = {
-            {"<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle trouble"}, {
-                "<leader>xx",
-                "<cmd>TroubleToggle workspace_diagnostics<cr>",
-                desc = "Toggle trouble workspace"
-            }
+            { "<leader>j", "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<CR>", desc = "Jump to next item."},
+            { "<leader>k", "<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<CR>", desc = "Jump to previous item."},
+            { "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open trouble workspace diagnostics" },
+            { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Open trouble document diagnostics" },
+            { "<leader>xq", "<cmd>Trouble quickfix toggle<CR>", desc = "Open trouble quickfix list" },
+            { "<leader>xl", "<cmd>Trouble loclist toggle<CR>", desc = "Open trouble location list" },
+            { "<leader>xt", "<cmd>Trouble todo toggle<CR>", desc = "Open todos in trouble" },
         }
     },
     {"crispgm/nvim-go", opts = require("plugins.config.go"), event = "BufRead"},
@@ -72,6 +89,97 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         config = require("plugins.config.lualine"),
         lazy = false
+    }, { -- DAP
+        "mfussenegger/nvim-dap",
+        event = "BufReadPre",
+        config = function()
+            local dap, dapui = require("dap"), require("dapui")
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+            local sign = vim.fn.sign_define
+
+            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = ""})
+            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
+            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
+            sign('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+
+            dap.configurations = {
+                go = {
+                  {
+                    type = "go",
+                    name = "Debug",
+                    request = "launch",
+                    program = "${file}",
+                  },
+                  {
+                    type = "go",
+                    name = "Debug test (go.mod)",
+                    request = "launch",
+                    mode = "test",
+                    program = "./${relativeFileDirname}",
+                  },
+              }
+            }
+            dap.adapters.go = {
+              type = "server",
+              port = "${port}",
+              executable = {
+                command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
+                args = { "dap", "-l", "127.0.0.1:${port}" },
+              },
+            }
+        end,
+        keys = {
+            {
+                "<leader>di",
+                "<cmd>lua require('dap').step_into()<cr>",
+                desc = "DAP step into"
+            },
+            {
+                "<leader>dn",
+                "<cmd>lua require('dap').step_over()<cr>",
+                desc = "DAP step over"
+            },
+            {
+                "<leader>do",
+                "<cmd>lua require('dap').step_out()<cr>",
+                desc = "DAP step out"
+            }, {
+                "<leader>b",
+                "<cmd>lua require('dap').toggle_breakpoint()<cr>",
+                desc = "DAP toogle breakpoint"
+            }, {
+                "<leader>dc",
+                "<cmd>lua require('dap').continue()<cr>",
+                desc = "DAP continue"
+            }, {
+                "<leader>dC",
+                "<cmd>lua require('dap').clear_breakpoints()<cr>",
+                desc = "DAP clear all breakpoints"
+            }, {
+                "<leader>dt",
+                "<cmd>lua require('dap').terminate()<cr>",
+                desc = "DAP terminate"
+            }
+        }
+    }, {
+        "rcarriga/nvim-dap-ui",
+        config = true,
+        keys = {
+            {
+                "<leader>ds",
+                "<cmd>lua require('dapui').toggle()<cr>",
+                desc = "Toogle DAP UI"
+            }
+        },
+        dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", "theHamsta/nvim-dap-virtual-text"}
     }, { -- Git
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
@@ -279,8 +387,13 @@ require("lazy").setup({
         end
     }, { -- Paranthesis/pairs
         "windwp/nvim-autopairs",
-        event = "BufEnter",
-        config = function() require("nvim-autopairs").setup() end
+        event = "InsertEnter",
+        config = function() 
+            -- local autopairs = require("nvim-autopairs").setup()
+            -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            -- local cmp = require("cmp")
+            -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end
     }, {
         "kylechui/nvim-surround",
         event = "VeryLazy",

@@ -27,6 +27,34 @@ theme.base = {
     CmpItemKindStruct = {fg = colors.yellow},
     CmpItemKindTypeParameter = {fg = colors.yellow},
 
+    -- DAP
+    DapBreakpoint = {fg = colors.red},
+    DapLogPoint = {fg = colors.green},
+    DapStopped = {fg = colors.green},
+    DapUINormal = {fg = colors.fg},
+    DapUIPlayPause = {fg = colors.green},
+    DapUIRestart = {fg = colors.yellow},
+    DapUIStepBack = {fg = colors.cyan},
+    DapUIStepInto = {fg = colors.purple},
+    DapUIStepOut = {fg = colors.green},
+    DapUIStepOver = {fg = colors.cyan},
+    DapUIStop = {fg = colors.red},
+    DapUIUnavailable = {fg = colors.gray},
+
+    DapUIBreakpointsCurrentLine = {fg = colors.green},
+    DapUIBreakpointsInfo = {fg = colors.green},
+    DapUIBreakpointsPath = {fg = colors.blue},
+    DapUIDecoration = {fg = colors.blue},
+    DapUIFloatBorder = {fg = colors.blue},
+    DapUILineNumber = {fg = colors.cyan},
+    DapUIModifiedValue = {fg = colors.cyan},
+    DapUIScope = {fg = colors.blue},
+    DapUIStoppedThread = {fg = colors.cyan},
+    DapUIThread = {fg = colors.green},
+    DapUIWatchesEmpty = {fg = colors.red},
+    DapUIWatchesError = {fg = colors.red},
+    DapUIWatchesValue = {fg = colors.green},
+
     -- Git diff
     DiffAdd = {bg = colors.dark_green},
     DiffChange = {bg = colors.dark_yellow},
@@ -64,6 +92,9 @@ theme.base = {
     NvimTreeGitMerge = {fg = colors.yellow},
     NvimTreeGitStaged = {fg = "#C678DD"},
     NvimTreeGitRenamed = {fg = "#81A1C1"},
+
+    -- Trouble
+    TroubleSelected = {bg = colors.light_bg},
 
     -- LSP
     DiagnosticError = {fg = colors.light_red}, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
@@ -117,8 +148,11 @@ theme.base = {
     PmenuSel = {fg = colors.black, bg = colors.blue},
     Pmenu = {bg = utils.lighten(colors.bg, 0.95)},
     NormalFloat = {bg = white},
-    FloatBorder = {guifg = white, guibg = white},
-    CursorLinenr = {guifg = colors.fg}
+    FloatBorder = {fg = white, bg = white},
+    CursorLinenr = {fg = colors.fg},
+    CursorLine = {bg = colors.light_bg},
+    WinBar = {fg = colors.fg, bg = colors.light_bg},
+    WinBarNC = {fg = colors.fg, bg = colors.light_bg}
 }
 
 for group, color in pairs(theme.base) do utils.set_color(group, color) end

@@ -44,8 +44,8 @@ cmd("set nowritebackup")
 
 cmd("syntax on")
 
-cmd("hi clear CursorLine")
-
 vim.opt.listchars:append("tab:>-")
 vim.g.mapleader = ","
 vim.opt.fillchars = vim.opt.fillchars + {diff = "/"}
+
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]

@@ -4,6 +4,7 @@ return {
     -- auto commands
     auto_format = false,
     auto_lint = false,
+    dap_debug = true,
     -- linters: revive, errcheck, staticcheck, golangci-lint
     linter = "golangci-lint",
     -- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}

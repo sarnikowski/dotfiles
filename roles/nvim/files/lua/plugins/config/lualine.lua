@@ -16,7 +16,17 @@ local conditions = {
 local config = {
     globalstatus = true,
     options = {
-        disabled_filetypes = {"packer", "alpha", "NvimTree"},
+        disabled_filetypes = {
+            "packer",
+            "alpha",
+            "NvimTree",
+            "dap-repl",
+            "dapui_breakpoints",
+            "dapui_console",
+            "dapui_scopes",
+            "dapui_watches",
+            "dapui_stacks",
+        },
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",

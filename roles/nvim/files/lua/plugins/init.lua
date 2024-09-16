@@ -374,10 +374,6 @@ require("lazy").setup({
                 desc = "Search treesitter"
             }
         }
-    }, { -- Stabilized windows
-        "luukvbaal/stabilize.nvim",
-        lazy = false,
-        config = function() require("stabilize").setup() end
     }, { -- Movement
         "ggandor/leap.nvim",
         event = "BufEnter",
@@ -444,7 +440,7 @@ require("lazy").setup({
         end
     }, -- Misc
     {"Pocco81/auto-save.nvim", event = "VeryLazy"},
-    {"tpope/vim-commentary", event = "BufEnter"}, {
+    {"numToStr/Comment.nvim", event = "VeryLazy" }, {
         "famiu/bufdelete.nvim", -- Delete buffer without messing up window
         event = "VeryLazy",
         keys = {{"<S-x>", "<cmd>Bdelete<cr>", desc = "Delete buffer"}}

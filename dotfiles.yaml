@@ -19,6 +19,9 @@
     - role: docker
       tags:
         - docker
+    - role: fish
+      tags:
+        - fish
     - role: general
       tags:
         - general
@@ -64,6 +67,3 @@
     - role: xresources
       tags:
         - xresources
-    - role: zsh
-      tags:
-        - zsh

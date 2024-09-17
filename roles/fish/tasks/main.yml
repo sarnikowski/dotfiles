@@ -1,0 +1,75 @@
+- name: Install fish | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: fish
+    state: present
+
+- name: Install curl | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: curl
+    state: present
+
+- name: Set fish as default shell for user | command
+  become: yes
+  become_user: root
+  command: chsh -s /bin/fish {{ ansible_user_id }}
+  register: fish_for_user
+  failed_when: fish_for_user.rc >= 1
+  changed_when: fish_for_user.rc == 0
+
+- name: Check for fisher installation | stat
+  stat:
+    path: "{{ home }}/.config/fish/fish_plugins"
+  register: oh_my_fish_stat
+
+- name: Install fisher | raw
+  raw: "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+  when: not oh_my_fish_stat.stat.exists
+
+- name: Install starship | pacman
+  become: yes
+  become_user: root
+  pacman:
+    name: starship
+    state: present
+
+- name: Creates .config dir | file
+  file:
+    path: "{{ home }}/.config/fish"
+    state: directory
+
+- name: Link config.fish file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/fish/files/config.fish"
+    dest: "{{ home }}/.config/fish/config.fish"
+    state: link
+    force: yes
+
+- name: Link plugins file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/fish/files/fish_plugins"
+    dest: "{{ home }}/.config/fish/fish_plugins"
+    state: link
+    force: yes
+
+- name: Link theme file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/fish/files/themes/onedark.theme"
+    dest: "{{ home }}/.config/fish/themes/onedark.theme"
+    state: link
+    force: yes
+
+- name: Link starship file | file
+  file:
+    src: "{{ dotfiles_home }}/roles/fish/files/starship/starship.toml"
+    dest: "{{ home }}/.config/starship.toml"
+    state: link
+    force: yes
+
+- name: Install/updatep plugins using fisher | raw
+  ansible.builtin.shell: fisher update
+  args:
+    executable: /usr/bin/fish

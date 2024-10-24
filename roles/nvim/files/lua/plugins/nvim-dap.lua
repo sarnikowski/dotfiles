@@ -1,11 +1,8 @@
-return { -- DAP
+return {
   "mfussenegger/nvim-dap",
-  event = "BufReadPre",
+  event = "VeryLazy",
   config = function()
-    local dap, dapui = require("dap"), require("dapui")
-    dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-    dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-    dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+    local dap = require("dap")
     dap.configurations = {
       go = {
         { type = "go", name = "Debug", request = "launch", program = "${file}" },
@@ -41,12 +38,12 @@ return { -- DAP
     }
   end,
   keys = {
-    { "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "DAP step into" },
-    { "<leader>dn", "<cmd>lua require('dap').step_over()<cr>", desc = "DAP step over" },
-    { "<leader>do", "<cmd>lua require('dap').step_out()<cr>", desc = "DAP step out" },
-    { "<leader>b", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "DAP toogle breakpoint" },
-    { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "DAP continue" },
-    { "<leader>dC", "<cmd>lua require('dap').clear_breakpoints()<cr>", desc = "DAP clear all breakpoints" },
-    { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "DAP terminate" }
+    { "<leader>di", function() require("dap").step_into() end, desc = "DAP step into" },
+    { "<leader>dn", function() require("dap").step_over() end, desc = "DAP step over" },
+    { "<leader>do", function() require("dap").step_out() end, desc = "DAP step out" },
+    { "<leader>b", function() require("dap").toggle_breakpoint() end, desc = "DAP toggle breakpoint" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "DAP continue" },
+    { "<leader>dC", function() require("dap").clear_breakpoints() end, desc = "DAP clear all breakpoints" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "DAP terminate" }
   }
 }

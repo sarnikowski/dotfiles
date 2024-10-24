@@ -14,7 +14,11 @@ return {
       adapters = {
         require("neotest-golang"),
         require("neotest-gtest").setup({ is_test_file = function(file) return vim.endswith(file, "_tests.cpp") end }),
-        require("neotest-python")({ dap = { justMyCode = false }, runner = "pytest", args = { "-vv" } })
+        require("neotest-python")({
+          dap = { justMyCode = false },
+          runner = "pytest",
+          args = { "-vv", "-s", "-m", "integration or not integration" }
+        })
       }
     })
   end,

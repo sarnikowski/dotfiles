@@ -6,6 +6,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "pyright",
+  "ruff_lsp",
   "rust_analyzer",
   "sqlls",
   "terraformls",
@@ -18,6 +19,14 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150
 }
+
+local on_attach = function(client, bufnr)
+  if client.name == 'ruff_lsp' then
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
+end
+
 return {
   "neovim/nvim-lspconfig",
   lazy = false,
@@ -56,6 +65,17 @@ return {
           flags = lsp_flags,
           settings = { Lua = { diagnostic = { globals = "vim" } } },
           cmd = { "yaml-language-server", "--stdio" }
+        })
+      elseif server == "pyright" then
+        nvim_lsp[server].setup({
+          on_attach = on_attach,
+          flags = lsp_flags,
+          settings = {
+            pyright = {
+              -- Using Ruff's import organizer
+              disableOrganizeImports = true,
+            },
+          },
         })
       else
         nvim_lsp[server].setup({ on_attach = on_attach, flags = lsp_flags })

@@ -4,25 +4,26 @@ return {
     require("mason").setup()
     ensure_installed = {
       "bash-language-server",
+      "cpptools",
       "debugpy",
+      "debugpy",
+      "delve",
       "dockerfile-language-server",
+      "golangci-lint",
       "gopls",
+      "jq",
       "json-lsp",
       "lua-language-server",
       "prettier",
       "pyright",
+      "ruff-lsp",
       "rust-analyzer",
+      "shfmt",
       "sqlls",
+      "stylua",
       "typescript-language-server",
       "vue-language-server",
       "yaml-language-server",
-      "cpptools",
-      "delve",
-      "debugpy",
-      "golangci-lint",
-      "jq",
-      "shfmt",
-      "stylua",
       "yamlfmt"
     }
     local mason_registry = require("mason-registry")

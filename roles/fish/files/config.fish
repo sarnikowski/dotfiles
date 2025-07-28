@@ -34,32 +34,32 @@ fish_add_path $GOPATH $GOPATH/bin
 
 # Exports
 set -gx COMPOSE_DOCKER_CLI_BUILD 1
-set -gx LESS "-SRXF"
+set -gx LESS -SRXF
 set -gx FZF_DEFAULT_OPTS \
-  --history=$HOME/.fzf_history \
-  --height 40% \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --separator="━" \
-  --scrollbar="┃" \
-  --pointer="┃" \
-  --color=bg+:#282C34 \
-  --color=bg:-1 \
-  --color=fg:-1 \
-  --color=fg+:-1 \
-  --color=header:#FF9E64 \
-  --color=hl+:#C678DD \
-  --color=hl:#C678DD \
-  --color=info:#98C379 \
-  --color=marker:#61AFEF \
-  --color=pointer:#61AFEF \
-  --color=prompt:#61AFEF \
-  --color=scrollbar:-1 \
-  --color=separator:#FF9E64 \
-  --color=spinner:#61AFEF
+    --history=$HOME/.fzf_history \
+    --height 40% \
+    --highlight-line \
+    --info=inline-right \
+    --ansi \
+    --layout=reverse \
+    --border=none \
+    --separator="━" \
+    --scrollbar="┃" \
+    --pointer="┃" \
+    --color=bg+:#282C34 \
+    --color=bg:-1 \
+    --color=fg:-1 \
+    --color=fg+:-1 \
+    --color=header:#FF9E64 \
+    --color=hl+:#C678DD \
+    --color=hl:#C678DD \
+    --color=info:#98C379 \
+    --color=marker:#61AFEF \
+    --color=pointer:#61AFEF \
+    --color=prompt:#61AFEF \
+    --color=scrollbar:-1 \
+    --color=separator:#FF9E64 \
+    --color=spinner:#61AFEF
 set -gx EXA_COLORS "da=0;37:uu=0;37:tr=38;5;011:gu=0;37:ur=38;5;011:gr=38;5;011:sn=38;5;011:sb=38;5;011"
 set -x GPG_TTY (tty)
 
@@ -79,7 +79,7 @@ alias ll "eza -lg --git --icons"
 
 alias python=python3
 alias pip=pip3
-alias nvim "nvim"
+alias nvim nvim
 
 alias reload-setup=./.config/bspwm/bspwmrc
 alias i3lock="i3lock --color=000000"

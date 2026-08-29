@@ -1,6 +1,0 @@
-- name: Install rustup | pacman
-  become: yes
-  become_user: root
-  pacman:
-    name: rustup
-    state: present

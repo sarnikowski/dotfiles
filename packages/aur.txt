@@ -1,0 +1,5 @@
+# AUR packages, one per line. Comments and blank lines are ignored.
+# Installed on fresh machines by bin/bootstrap via `omarchy pkg aur add`.
+
+slack-desktop
+spotify

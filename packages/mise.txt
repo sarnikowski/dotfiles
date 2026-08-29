@@ -1,0 +1,4 @@
+# Tools managed by mise, one per line. Comments and blank lines are ignored.
+# Installed globally on fresh machines by bin/bootstrap via `mise use -g`.
+
+go

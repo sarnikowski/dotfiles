@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
+# Bootstrap this machine: install packages, then symlink configs with stow.
+# Targets Omarchy (Arch + the `omarchy` CLI) with GNU stow and mise.
 
-tags="$1"
+set -euo pipefail
 
-if [ -z $tags ]; then
-  tags="all"
-fi
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-if ! [ -x "$(command -v ansible)" ]; then
-  sudo pacman -S ansible --noconfirm
-fi
+# Print a package list with comments and blank lines stripped.
+pkglist() { grep -vE '^[[:space:]]*(#|$)' "$1" || true; }
 
-SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
-builtin cd $SCRIPT_DIR; builtin cd ..
+echo "==> Installing repo packages"
+pkglist packages/pacman.txt | xargs -r omarchy pkg add
 
-if ! [ -f ./library/yay ]; then
-    git clone git@github.com:mnussbaum/ansible-yay.git /tmp/ansible-yay
-    cp /tmp/ansible-yay/yay ./library/
-    rm -rf /tmp/ansible-yay
-fi
+echo "==> Installing AUR packages"
+pkglist packages/aur.txt | xargs -r omarchy pkg aur add
 
-ansible-playbook -i hosts dotfiles.yaml --ask-become-pass --tags $tags
+echo "==> Installing mise tools"
+pkglist packages/mise.txt | xargs -r mise use -g
+
+echo "==> Linking configs with stow"
+stow -v -R fish foot hypr nvim onedark starship tmux
+
+echo "==> Installing tmux plugins (tpm)"
+tpm_dir="$HOME/.tmux/plugins/tpm"
+[ -d "$tpm_dir" ] || git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+"$tpm_dir/bin/install_plugins"
+
+echo "==> Done"

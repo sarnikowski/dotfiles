@@ -3,3 +3,8 @@
 
 fzf
 ripgrep
+
+# Upstream JetBrains Mono (all weights incl. Medium) alongside Omarchy's
+# nerd-basic font, so foot can render text at medium weight and fall back
+# to the Nerd Font for icon glyphs.
+ttf-jetbrains-mono

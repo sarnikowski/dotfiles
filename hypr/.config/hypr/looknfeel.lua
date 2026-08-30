@@ -57,3 +57,8 @@ hl.config({
     border_size = 1,
   },
 })
+
+-- Only draw a window border when the workspace has more than one tiled window.
+-- The w[tv1] selector matches a workspace with exactly one tiled, visible
+-- window; Hyprland re-evaluates it as windows open and close.
+hl.workspace_rule({ workspace = "w[tv1]", no_border = true })

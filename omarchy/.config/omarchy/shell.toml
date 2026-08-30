@@ -1,0 +1,11 @@
+# base-size drives the whole shell (menus, panels, notifications) and the
+# bar's height. Leave it as-is so only the bar text below changes.
+[font]
+base-size = 11
+
+# Bar text widgets (clock, weather, keyboard layout, system-update) render at
+# the `body` token; the center indicator cluster uses `caption`. Overriding
+# just these enlarges the bar labels without growing the rest of the shell,
+# the bar height, or terminal/app fonts.
+body = 14
+caption = 12

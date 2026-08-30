@@ -19,7 +19,7 @@ echo "==> Installing mise tools"
 pkglist packages/mise.txt | xargs -r mise use -g
 
 echo "==> Linking configs with stow"
-stow -v -R fish foot hypr nvim onedark starship tmux
+stow -v -R fish foot hypr nvim omarchy onedark starship tmux
 
 echo "==> Installing tmux plugins (tpm)"
 tpm_dir="$HOME/.tmux/plugins/tpm"

@@ -18,8 +18,39 @@ pkglist packages/aur.txt | xargs -r omarchy pkg aur add
 echo "==> Installing mise tools"
 pkglist packages/mise.txt | xargs -r mise use -g
 
+repo="$PWD"
+
+# Omarchy ships foot.ini as a real file and `omarchy display text size` creates
+# shell.toml; stow won't overwrite a real file. theme.lua is a stray symlink
+# from Omarchy's stock nvim config that fights our lua/plugins/colorscheme.lua.
+rm -f ~/.config/foot/foot.ini ~/.config/omarchy/shell.toml \
+      ~/.config/nvim/lua/plugins/theme.lua
+
 echo "==> Linking configs with stow"
-stow -v -R fish foot hypr nvim omarchy onedark starship tmux
+# --no-folding keeps ~/.config/fish a real directory, so fisher's plugin files
+# don't get written inside the repo via a folded directory symlink.
+stow -R --no-folding fish foot hypr nvim omarchy starship tmux
+
+echo "==> Applying the onedark theme"
+# One directory symlink, not a stow package: `omarchy theme set` copies the
+# theme dir into its staging area, where stow's per-file symlinks would break.
+mkdir -p ~/.config/omarchy/themes
+ln -sfnT "$repo/themes/onedark" ~/.config/omarchy/themes/onedark
+omarchy theme set onedark
+
+echo "==> Setting fish as the default shell"
+fish_path="$(command -v fish)"
+# Read the login shell from passwd, not $SHELL — $SHELL is stale until re-login,
+# so a repeat run in the same session would prompt for chsh again.
+current_shell="$(getent passwd "$USER" | cut -d: -f7)"
+if [ -n "$fish_path" ] && [ "$current_shell" != "$fish_path" ]; then
+  grep -qxF "$fish_path" /etc/shells || echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
+  chsh -s "$fish_path"
+fi
+
+echo "==> Installing fisher and fish plugins"
+fisher_url="https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+fish -c "curl -sL $fisher_url | source && fisher install jorgebucaran/fisher && fisher update"
 
 echo "==> Installing tmux plugins (tpm)"
 tpm_dir="$HOME/.tmux/plugins/tpm"

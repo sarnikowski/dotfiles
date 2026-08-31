@@ -217,24 +217,24 @@ function M.apply()
     --Neotree
     NeoTreeDimText = { fg = darken(c.fg, 0.95) },
     NeoTreeFileName = { fg = c.fg },
-    NeoTreeGitModified = { fg = c.orange },
+    NeoTreeGitModified = { fg = c.yellow },
     NeoTreeGitStaged = { fg = c.green },
     NeoTreeGitUntracked = { fg = c.red },
 
     -- LSP -- Info stays blue (onedark's own): noice borders / cmdline icon / search
     -- count [1/4] all link to the DiagnosticInfo family.
     DiagnosticError = { fg = c.light_red },
-    DiagnosticWarn = { fg = c.orange },
+    DiagnosticWarn = { fg = c.yellow },
     DiagnosticInfo = { fg = c.blue },
     DiagnosticHint = { fg = c.hint },
 
     DiagnosticUnderlineError = { fg = c.light_red, style = "underline" },
-    DiagnosticUnderlineWarn = { fg = c.orange, style = "underline" },
+    DiagnosticUnderlineWarn = { fg = c.yellow, style = "underline" },
     DiagnosticUnderlineInfo = { fg = c.blue, style = "underline" },
     DiagnosticUnderlineHint = { fg = c.hint, style = "underline" },
 
     DiagnosticVirtualTextError = { bg = lighten(c.bg, 0.95), fg = c.light_red },
-    DiagnosticVirtualTextWarn = { bg = lighten(c.bg, 0.95), fg = c.orange },
+    DiagnosticVirtualTextWarn = { bg = lighten(c.bg, 0.95), fg = c.yellow },
     DiagnosticVirtualTextInfo = { bg = lighten(c.bg, 0.95), fg = c.blue },
     DiagnosticVirtualTextHint = { bg = lighten(c.bg, 0.95), fg = c.hint },
 

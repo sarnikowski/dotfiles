@@ -74,11 +74,14 @@ function M.apply()
 
     red = "#E06C75",
     light_red = "#F9929B",
-    dark_red = darken("#E06C75", 0.40),
+    -- Subtle diff backgrounds: the onedark accent tinted onto the editor bg, so
+    -- added/removed/changed lines read as onedark rather than a neon block.
+    dark_red = darken("#E06C75", 0.2, "#282C34"),
     green = "#98C379",
-    dark_green = darken("#7ECA9C", 0.30),
+    dark_green = darken("#98C379", 0.2, "#282C34"),
     yellow = "#E5C07B",
-    dark_yellow = darken("#E5C07B", 0.30),
+    dark_yellow = darken("#E5C07B", 0.2, "#282C34"),
+    darker_yellow = darken("#E5C07B", 0.4, "#282C34"),
     orange = "#D19A66",
     blue = "#61AFEF",
     dark_blue = darken("#61AFEF", 0.30),
@@ -191,10 +194,22 @@ function M.apply()
     GitSignsDeleteLn = { fg = c.red },
     GitSignsDeleteNr = { fg = c.red },
 
-    -- Git diff
-    DiffAdd = { bg = c.dark_green },
-    DiffChange = { bg = c.dark_yellow },
-    DiffDelete = { bg = c.dark_red },
+    -- Git diff (diff mode / gitsigns preview). onedark.vim ships these with a
+    -- full-bright bg and near-black fg; drop to a subtle tint and restore a
+    -- readable fg so added/removed lines aren't invisible.
+    DiffAdd = { fg = c.fg, bg = c.dark_green },
+    DiffChange = { fg = c.fg, bg = c.dark_yellow },
+    DiffDelete = { fg = c.fg, bg = c.dark_red },
+    DiffText = { fg = c.fg, bg = c.darker_yellow },
+
+    -- Unified-diff text groups. onedark.vim defines diffAdded/diffRemoved but
+    -- not diffChanged or the Neovim-generic Added/Removed/Changed (used by the
+    -- diff filetype, treesitter @diff.*, lazy.nvim, mason, :checkhealth, and the
+    -- `git commit` verbose diff), which otherwise fall back to non-onedark hues.
+    diffChanged = { fg = c.yellow },
+    Added = { fg = c.green },
+    Removed = { fg = c.red },
+    Changed = { fg = c.yellow },
 
     -- Neotest
     NeotestAdapterName = { fg = c.purple, style = "bold" },

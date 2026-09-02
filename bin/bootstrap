@@ -20,11 +20,11 @@ pkglist packages/mise.txt | xargs -r mise use -g
 
 repo="$PWD"
 
-# Omarchy ships foot.ini as a real file and `omarchy display text size` creates
-# shell.toml; stow won't overwrite a real file. theme.lua is a stray symlink
-# from Omarchy's stock nvim config that fights our lua/plugins/colorscheme.lua.
+# Omarchy ships foot.ini and shell.json as real files and `omarchy display text
+# size` creates shell.toml; stow won't overwrite a real file. theme.lua is a
+# stray symlink from Omarchy's stock nvim config that fights colorscheme.lua.
 rm -f ~/.config/foot/foot.ini ~/.config/omarchy/shell.toml \
-      ~/.config/nvim/lua/plugins/theme.lua
+      ~/.config/omarchy/shell.json ~/.config/nvim/lua/plugins/theme.lua
 
 echo "==> Linking configs with stow"
 # --no-folding keeps ~/.config/fish a real directory, so fisher's plugin files

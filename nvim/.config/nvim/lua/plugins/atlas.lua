@@ -26,98 +26,95 @@ return {
       desc = "Re-apply onedark overrides over atlas.nvim's own highlights",
     })
   end,
-  opts = function()
-    local repo = current_github_repo()
-    local repo_filter = repo and ("repo:" .. repo .. " ") or ""
-
-    return {
-      global_statusline = true,
-
-      keymaps = {
-        pulls = {
-          review = {
-            explorer = {
-              open_file = "o",
-            },
-            diff = {
-              next_comment = "<C-j>",
-              previous_comment = "<C-k>",
-            },
-          },
-        },
+  opts = {
+    providers = {
+      ---@type AtlasGitHubConfig
+      github = {
+        cache_ttl = 300,
       },
+    },
+
+    keymaps = {
       pulls = {
-        diff = {
-          open_cmd = "CodeDiff", -- route PR diffs through codediff.nvim instead of AtlasDiff
+        review = {
+          -- ]c / [c are codediff's hunk navigation.
+          next_comment = "<C-j>",
+          prev_comment = "<C-k>",
         },
-        providers = {
-          ---@type AtlasGitHubConfig
-          github = {
-            cache_ttl = 300,
-            views = {
-              {
-                name = "This repo",
-                key = "1",
-                layout = "plain",
-                search = repo_filter .. "is:pr sort:updated-desc",
-              },
-              {
-                name = "My PRs",
-                key = "2",
-                layout = "plain",
-                search = "author:@me sort:updated-desc",
-              },
-              {
-                name = "Review requested",
-                key = "3",
-                layout = "plain",
-                search = "is:pr is:open review-requested:@me",
-              },
-            },
-            bookmarks = {
-              items = {
-                ["Drafts"] = "is:pr is:draft author:@me",
-                ["Recently merged"] = "is:pr is:merged author:@me sort:updated-desc",
-              },
-            },
+      },
+    },
+
+    pulls = {
+      diff = {
+        open_cmd = "CodeDiff", -- route PR diffs through codediff.nvim instead of AtlasDiff
+        lsp = {
+          enabled = true,
+          -- Dependencies live outside the PR's commit, so the worktree symlinks them
+          -- back to this checkout. Missing ones are skipped.
+          link = { "node_modules", ".venv", "vendor" },
+        },
+      },
+      ---@type AtlasGitHubPullsConfig
+      github = {
+        views = {
+          {
+            name = "This repo",
+            key = "1",
+            layout = "plain",
+            current_repo = true,
+            search = "is:pr sort:updated-desc",
+          },
+          {
+            name = "My PRs",
+            key = "2",
+            layout = "plain",
+            search = "author:@me sort:updated-desc",
+          },
+          {
+            name = "Review requested",
+            key = "3",
+            layout = "plain",
+            search = "is:pr is:open review-requested:@me",
+          },
+        },
+        bookmarks = {
+          items = {
+            ["Drafts"] = "is:pr is:draft author:@me",
+            ["Recently merged"] = "is:pr is:merged author:@me sort:updated-desc",
           },
         },
       },
 
-      issues = {
-        max_results = 100,
-        providers = {
-          ---@type AtlasGitHubIssuesConfig
-          github = {
-            cache_ttl = 300,
-            views = {
-              {
-                name = "This repo",
-                key = "1",
-                layout = "plain",
-                search = repo_filter .. "is:open sort:updated-desc",
-              },
-              {
-                name = "Assigned",
-                key = "2",
-                layout = "plain",
-                search = "assignee:@me is:open",
-              },
-              {
-                name = "Created",
-                key = "3",
-                layout = "plain",
-                search = "author:@me is:open",
-              },
-            },
-            bookmarks = {
-              items = {
-                ["Bugs"] = repo_filter .. "is:issue is:open label:bug",
-              },
-            },
+    issues = {
+      ---@type AtlasGitHubIssuesConfig
+      github = {
+        views = {
+          {
+            name = "This repo",
+            key = "1",
+            layout = "plain",
+            current_repo = true,
+            search = "is:open sort:updated-desc",
+          },
+          {
+            name = "Assigned",
+            key = "2",
+            layout = "plain",
+            search = "assignee:@me is:open",
+          },
+          {
+            name = "Created",
+            key = "3",
+            layout = "plain",
+            search = "author:@me is:open",
+          },
+        },
+        bookmarks = {
+          items = {
+            ["Bugs"] = { current_repo = true, search = "is:issue is:open label:bug" },
           },
         },
       },
-    }
-  end,
+    },
+  },
 }

@@ -1,6 +1,26 @@
 return {
   "esmuellert/codediff.nvim",
   cmd = "CodeDiff",
+  init = function()
+    -- The onedark comment grey (#5C6370) is nearly invisible on the line_insert
+    -- background below. Brighten comments only inside CodeDiff windows via a
+    -- window-local highlight namespace (links like @comment resolve through it).
+    local ns = vim.api.nvim_create_namespace("codediff_readable_comments")
+    vim.api.nvim_set_hl(ns, "Comment", { fg = "#9A93A3", italic = true })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = { "CodeDiffOpen", "CodeDiffFileSelect" },
+      callback = function(ev)
+        local tab = ev.data and ev.data.tabpage or vim.api.nvim_get_current_tabpage()
+        if not vim.api.nvim_tabpage_is_valid(tab) then
+          return
+        end
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+          vim.api.nvim_win_set_hl_ns(win, ns)
+        end
+      end,
+    })
+  end,
   opts = {
     highlights = {
       line_insert = "#2f4535",

@@ -2,17 +2,14 @@
   "version": 1,
   "idle": {
     "screensaver": 150,
-    "lock": 300
+    "lock": 10000000
   },
   "bar": {
     "position": "top",
-    "transparent": false,
+    "transparent": true,
     "centerAnchor": "omarchy.clock",
     "layout": {
       "left": [
-        {
-          "id": "omarchy.menu"
-        },
         {
           "id": "omarchy.workspaces"
         }
@@ -28,6 +25,9 @@
           "verticalFormat": "HH\n—\nmm"
         },
         {
+          "id": "omarchy.elsewhen"
+        },
+        {
           "id": "omarchy.keyboard-layout"
         },
         {
@@ -39,7 +39,7 @@
       ],
       "right": [
         {
-          "id": "omarchy.tray"
+          "id": "im0001gt.hw-tooltip"
         },
         {
           "id": "omarchy.tailscale"
